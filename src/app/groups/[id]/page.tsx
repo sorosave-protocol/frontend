@@ -5,7 +5,23 @@ import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
 import { useState } from "react";
-import { formatAmount, GroupStatus } from "@sorosave/sdk";
+
+// Types (copied from SDK)
+enum GroupStatus {
+  Forming = 0,
+  Active = 1,
+  Completed = 2,
+  Disputed = 3,
+  Paused = 4,
+}
+
+function formatAmount(amount: bigint): string {
+  return (Number(amount) / 10000000).toFixed(2);
+}
+
+function getStatusLabel(status: GroupStatus): string {
+  return GroupStatus[status] || "Unknown";
+}
 
 // TODO: Fetch real data from contract
 const MOCK_GROUP = {
@@ -41,8 +57,8 @@ export default function GroupDetailPage() {
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">{group.name}</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{group.name}</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             {formatAmount(group.contributionAmount)} tokens per cycle
           </p>
         </div>
@@ -65,8 +81,8 @@ export default function GroupDetailPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Actions
               </h3>
               <div className="space-y-3">
@@ -86,30 +102,30 @@ export default function GroupDetailPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
                 Group Info
               </h3>
               <dl className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Status</dt>
-                  <dd className="font-medium text-gray-900">{group.status}</dd>
+                  <dt className="text-gray-500 dark:text-gray-400">Status</dt>
+                  <dd className="font-medium text-gray-900 dark:text-white">{getStatusLabel(group.status)}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Members</dt>
-                  <dd className="font-medium text-gray-900">
+                  <dt className="text-gray-500 dark:text-gray-400">Members</dt>
+                  <dd className="font-medium text-gray-900 dark:text-white">
                     {group.members.length}/{group.maxMembers}
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Cycle</dt>
-                  <dd className="font-medium text-gray-900">
+                  <dt className="text-gray-500 dark:text-gray-400">Cycle</dt>
+                  <dd className="font-medium text-gray-900 dark:text-white">
                     {group.cycleLength / 86400} days
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Pot Size</dt>
-                  <dd className="font-medium text-gray-900">
+                  <dt className="text-gray-500 dark:text-gray-400">Pot Size</dt>
+                  <dd className="font-medium text-gray-900 dark:text-white">
                     {formatAmount(
                       group.contributionAmount * BigInt(group.members.length)
                     )}{" "}
