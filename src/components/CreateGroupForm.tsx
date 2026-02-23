@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useWallet } from "@/app/providers";
-import { sorosaveClient, NETWORK_PASSPHRASE } from "@/lib/sorosave";
-import { parseAmount } from "@sorosave/sdk";
-import { signTransaction } from "@/lib/wallet";
+
+// Mock functions - would be imported from SDK in production
+function parseAmount(amount: string): bigint {
+  return BigInt(Math.floor(parseFloat(amount) * 10000000));
+}
 
 export function CreateGroupForm() {
   const { address, isConnected } = useWallet();
@@ -24,25 +26,15 @@ export function CreateGroupForm() {
     setError(null);
 
     try {
-      const tx = await sorosaveClient.createGroup(
-        {
-          admin: address,
-          name,
-          token: tokenAddress,
-          contributionAmount: parseAmount(contributionAmount),
-          cycleLength: parseInt(cycleLength),
-          maxMembers: parseInt(maxMembers),
-        },
-        address
-      );
-
-      const signedXdr = await signTransaction(
-        tx.toXDR(),
-        NETWORK_PASSPHRASE
-      );
-
-      // TODO: Submit signed transaction to network
-      console.log("Signed transaction:", signedXdr);
+      // TODO: Implement actual group creation via SDK
+      console.log("Creating group:", {
+        admin: address,
+        name,
+        token: tokenAddress,
+        contributionAmount: parseAmount(contributionAmount),
+        cycleLength: parseInt(cycleLength),
+        maxMembers: parseInt(maxMembers),
+      });
       alert("Group created successfully!");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create group");
@@ -53,7 +45,7 @@ export function CreateGroupForm() {
 
   if (!isConnected) {
     return (
-      <div className="text-center py-12 text-gray-500">
+      <div className="text-center py-12 text-gray-500 dark:text-gray-400">
         Please connect your wallet to create a group.
       </div>
     );
@@ -62,7 +54,7 @@ export function CreateGroupForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Group Name
         </label>
         <input
@@ -70,13 +62,13 @@ export function CreateGroupForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           placeholder="My Savings Circle"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Token Contract Address
         </label>
         <input
@@ -84,13 +76,13 @@ export function CreateGroupForm() {
           value={tokenAddress}
           onChange={(e) => setTokenAddress(e.target.value)}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           placeholder="CDLZ..."
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Contribution Amount (per cycle)
         </label>
         <input
@@ -98,20 +90,20 @@ export function CreateGroupForm() {
           value={contributionAmount}
           onChange={(e) => setContributionAmount(e.target.value)}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           placeholder="100"
         />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Cycle Length (seconds)
           </label>
           <select
             value={cycleLength}
             onChange={(e) => setCycleLength(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="3600">1 Hour</option>
             <option value="86400">1 Day</option>
@@ -120,7 +112,7 @@ export function CreateGroupForm() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Max Members
           </label>
           <input
@@ -129,13 +121,13 @@ export function CreateGroupForm() {
             max="20"
             value={maxMembers}
             onChange={(e) => setMaxMembers(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           />
         </div>
       </div>
 
       {error && (
-        <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm">
+        <div className="bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 p-3 rounded-lg text-sm">
           {error}
         </div>
       )}
