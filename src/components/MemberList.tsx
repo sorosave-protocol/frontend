@@ -1,6 +1,6 @@
 "use client";
 
-import { shortenAddress } from "@sorosave/sdk";
+import { shortenAddress } from "@/lib/sdk";
 
 interface MemberListProps {
   members: string[];

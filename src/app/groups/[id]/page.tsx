@@ -4,8 +4,10 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
+import { AdminPanel } from "@/components/AdminPanel";
 import { useState } from "react";
-import { formatAmount, GroupStatus } from "@sorosave/sdk";
+import { formatAmount, GroupStatus } from "@/lib/sdk";
+import { useWallet } from "@/app/providers";
 
 // TODO: Fetch real data from contract
 const MOCK_GROUP = {
@@ -34,6 +36,7 @@ const MOCK_GROUP = {
 
 export default function GroupDetailPage() {
   const [showContributeModal, setShowContributeModal] = useState(false);
+  const { address } = useWallet();
   const group = MOCK_GROUP;
 
   return (
@@ -65,6 +68,7 @@ export default function GroupDetailPage() {
           </div>
 
           <div className="space-y-4">
+            {address && <AdminPanel group={group} connectedAddress={address} />}
             <div className="bg-white rounded-xl shadow-sm border p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 Actions
