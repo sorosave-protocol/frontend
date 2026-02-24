@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useWallet } from "@/app/providers";
 import { sorosaveClient, NETWORK_PASSPHRASE } from "@/lib/sorosave";
-import { parseAmount } from "@sorosave/sdk";
+import { parseAmount } from "@/lib/sdk";
 import { signTransaction } from "@/lib/wallet";
 
 export function CreateGroupForm() {
