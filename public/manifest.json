@@ -1,0 +1,38 @@
+{
+  "name": "SoroSave",
+  "short_name": "SoroSave",
+  "description": "Decentralized rotating savings protocol on Stellar/Soroban",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#16a34a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "categories": ["finance"],
+  "shortcuts": [
+    {
+      "name": "My Groups",
+      "url": "/groups",
+      "description": "View your savings groups"
+    },
+    {
+      "name": "Create Group",
+      "url": "/groups/new",
+      "description": "Start a new savings group"
+    }
+  ]
+}
