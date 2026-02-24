@@ -1,4 +1,4 @@
-import { SoroSaveClient } from "@sorosave/sdk";
+import { SoroSaveClient } from "@/lib/sdk";
 
 const TESTNET_RPC_URL =
   process.env.NEXT_PUBLIC_RPC_URL || "https://soroban-testnet.stellar.org";
