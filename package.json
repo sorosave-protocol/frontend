@@ -6,16 +6,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
-    "@sorosave/sdk": "workspace:*",
+    "@albedo-link/intent": "^0.13.0",
     "@stellar/freighter-api": "^2.0.0",
+    "@stellar/stellar-sdk": "^12.0.0",
     "next": "^14.2.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.41.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
