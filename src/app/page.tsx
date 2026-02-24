@@ -1,10 +1,15 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
+import { OnboardingTour } from "@/components/OnboardingTour";
 
 export default function Home() {
+  const [showTour, setShowTour] = useState(false);
   return (
     <>
       <Navbar />
+      <OnboardingTour forceShow={showTour} onComplete={() => setShowTour(false)} />
       <main>
         {/* Hero */}
         <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
@@ -129,18 +134,10 @@ export default function Home() {
               Open-source decentralized group savings protocol on Soroban.
             </p>
             <div className="mt-4 space-x-4 text-sm">
-              <a
-                href="https://github.com/big14way/sorosave"
-                className="hover:text-white"
-              >
-                GitHub
-              </a>
-              <a href="#" className="hover:text-white">
-                Docs
-              </a>
-              <a href="#" className="hover:text-white">
-                Discord
-              </a>
+              <a href="https://github.com/big14way/sorosave" className="hover:text-white">GitHub</a>
+              <a href="#" className="hover:text-white">Docs</a>
+              <a href="#" className="hover:text-white">Discord</a>
+              <button onClick={() => setShowTour(true)} className="hover:text-white underline">Take the tour</button>
             </div>
           </div>
         </footer>
