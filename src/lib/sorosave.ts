@@ -1,15 +1,34 @@
-import { SoroSaveClient } from "@sorosave/sdk";
+import { SoroSaveClient } from "@/lib/sdk";
+import { NETWORK_CONFIG, Network } from "@/components/NetworkSwitcher";
 
-const TESTNET_RPC_URL =
-  process.env.NEXT_PUBLIC_RPC_URL || "https://soroban-testnet.stellar.org";
-const NETWORK_PASSPHRASE =
-  process.env.NEXT_PUBLIC_NETWORK_PASSPHRASE || "Test SDF Network ; September 2015";
-const CONTRACT_ID = process.env.NEXT_PUBLIC_CONTRACT_ID || "";
+function getNetwork(): Network {
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem("sorosave_network") as Network | null;
+    if (stored === "mainnet" || stored === "testnet") return stored;
+  }
+  return "testnet";
+}
 
+function getConfig() {
+  return NETWORK_CONFIG[getNetwork()];
+}
+
+export function getSorosaveClient() {
+  const config = getConfig();
+  return new SoroSaveClient({
+    contractId: config.contractId,
+    rpcUrl: config.rpcUrl,
+    networkPassphrase: config.passphrase,
+  });
+}
+
+// Legacy named exports for backward compat
 export const sorosaveClient = new SoroSaveClient({
-  contractId: CONTRACT_ID,
-  rpcUrl: TESTNET_RPC_URL,
-  networkPassphrase: NETWORK_PASSPHRASE,
+  contractId: NETWORK_CONFIG.testnet.contractId,
+  rpcUrl: NETWORK_CONFIG.testnet.rpcUrl,
+  networkPassphrase: NETWORK_CONFIG.testnet.passphrase,
 });
 
-export { TESTNET_RPC_URL, NETWORK_PASSPHRASE, CONTRACT_ID };
+export const NETWORK_PASSPHRASE = NETWORK_CONFIG.testnet.passphrase;
+export const TESTNET_RPC_URL = NETWORK_CONFIG.testnet.rpcUrl;
+export const CONTRACT_ID = NETWORK_CONFIG.testnet.contractId;

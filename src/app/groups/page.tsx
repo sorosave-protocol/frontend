@@ -2,7 +2,7 @@
 
 import { Navbar } from "@/components/Navbar";
 import { GroupCard } from "@/components/GroupCard";
-import { SavingsGroup, GroupStatus } from "@sorosave/sdk";
+import { SavingsGroup, GroupStatus } from "@/lib/sdk";
 
 // Placeholder data for development — will be replaced with contract queries
 const PLACEHOLDER_GROUPS: SavingsGroup[] = [
