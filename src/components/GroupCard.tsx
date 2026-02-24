@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { SavingsGroup, formatAmount, getStatusLabel } from "@sorosave/sdk";
+import { SavingsGroup, formatAmount, getStatusLabel } from "@/lib/sdk";
 
 interface GroupCardProps {
   group: SavingsGroup;

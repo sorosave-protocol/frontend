@@ -4,8 +4,9 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
-import { useState } from "react";
-import { formatAmount, GroupStatus } from "@sorosave/sdk";
+import { useState, useCallback } from "react";
+import { formatAmount, GroupStatus } from "@/lib/sdk";
+import { usePolling } from "@/hooks/usePolling";
 
 // TODO: Fetch real data from contract
 const MOCK_GROUP = {
@@ -34,7 +35,19 @@ const MOCK_GROUP = {
 
 export default function GroupDetailPage() {
   const [showContributeModal, setShowContributeModal] = useState(false);
+  const [contributionsReceived, setContributionsReceived] = useState(1);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const group = MOCK_GROUP;
+  const isRoundComplete = contributionsReceived >= group.members.length;
+
+  // Poll every 10 seconds; stop when round is complete
+  const poll = useCallback(async () => {
+    // TODO: replace with sorosaveClient.getRoundStatus(group.id)
+    setContributionsReceived(prev => Math.min(prev + 1, group.members.length));
+    setLastUpdated(new Date());
+  }, [group.members.length]);
+
+  usePolling(poll, 10_000, group.status === GroupStatus.Active && !isRoundComplete);
 
   return (
     <>
@@ -52,8 +65,10 @@ export default function GroupDetailPage() {
             <RoundProgress
               currentRound={group.currentRound}
               totalRounds={group.totalRounds}
-              contributionsReceived={1}
+              contributionsReceived={contributionsReceived}
               totalMembers={group.members.length}
+              isLive={group.status === GroupStatus.Active}
+              lastUpdated={lastUpdated}
             />
 
             <MemberList

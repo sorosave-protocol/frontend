@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useWallet } from "@/app/providers";
 import { sorosaveClient, NETWORK_PASSPHRASE } from "@/lib/sorosave";
-import { formatAmount } from "@sorosave/sdk";
+import { formatAmount } from "@/lib/sdk";
 import { signTransaction } from "@/lib/wallet";
 
 interface ContributeModalProps {
