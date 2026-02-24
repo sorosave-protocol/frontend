@@ -4,8 +4,9 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
+import { GroupAnalytics } from "@/components/GroupAnalytics";
 import { useState } from "react";
-import { formatAmount, GroupStatus } from "@sorosave/sdk";
+import { formatAmount, GroupStatus } from "@/lib/sdk";
 
 // TODO: Fetch real data from contract
 const MOCK_GROUP = {
@@ -62,6 +63,7 @@ export default function GroupDetailPage() {
               payoutOrder={group.payoutOrder}
               currentRound={group.currentRound}
             />
+            <GroupAnalytics />
           </div>
 
           <div className="space-y-4">
