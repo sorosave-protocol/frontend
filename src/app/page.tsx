@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
+import { GroupRecommendations } from "@/components/GroupRecommendations";
 
 export default function Home() {
   return (
@@ -80,6 +81,13 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Group Recommendations */}
+        <section className="py-20 bg-gradient-to-b from-white to-gray-50" data-tour="groups">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <GroupRecommendations />
           </div>
         </section>
 
