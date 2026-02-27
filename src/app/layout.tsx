@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
+import { InstallPrompt } from "@/components/InstallPrompt";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "SoroSave — Decentralized Group Savings",
   description:
     "A decentralized rotating savings protocol built on Soroban. Create or join savings groups, contribute each cycle, and receive the pot when it's your turn.",
+  manifest: "/manifest.json",
+  themeColor: "#16a34a",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "SoroSave",
+  },
 };
 
 export default function RootLayout({
@@ -17,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen bg-gray-50">
         <Providers>{children}</Providers>
+        <InstallPrompt />
       </body>
     </html>
   );
