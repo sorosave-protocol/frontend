@@ -16,8 +16,8 @@ export function MemberList({
   currentRound,
 }: MemberListProps) {
   return (
-    <div className="bg-white rounded-xl shadow-sm border p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Members</h3>
+    <div className="rounded-xl border bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+      <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">Members</h3>
       <div className="space-y-3">
         {members.map((member, index) => {
           const payoutRound =
@@ -30,14 +30,14 @@ export function MemberList({
           return (
             <div
               key={member}
-              className="flex items-center justify-between py-2 border-b last:border-0"
+              className="flex items-center justify-between border-b border-gray-200 py-2 last:border-0 dark:border-gray-800"
             >
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-700 text-sm font-medium">
                   {index + 1}
                 </div>
                 <div>
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     {shortenAddress(member, 6)}
                   </span>
                   {member === admin && (
@@ -54,12 +54,12 @@ export function MemberList({
                   </span>
                 )}
                 {hasReceived && (
-                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full dark:bg-gray-800 dark:text-gray-300">
                     Received
                   </span>
                 )}
                 {payoutRound && !hasReceived && !isCurrentRecipient && (
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
                     Round {payoutRound}
                   </span>
                 )}

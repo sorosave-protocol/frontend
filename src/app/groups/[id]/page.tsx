@@ -41,8 +41,8 @@ export default function GroupDetailPage() {
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">{group.name}</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{group.name}</h1>
+          <p className="mt-1 text-gray-600 dark:text-gray-300">
             {formatAmount(group.contributionAmount)} tokens per cycle
           </p>
         </div>
@@ -65,8 +65,8 @@ export default function GroupDetailPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="rounded-xl border bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+              <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Actions
               </h3>
               <div className="space-y-3">
@@ -86,30 +86,30 @@ export default function GroupDetailPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">
+            <div className="rounded-xl border bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+              <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
                 Group Info
               </h3>
               <dl className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Status</dt>
-                  <dd className="font-medium text-gray-900">{group.status}</dd>
+                  <dt className="text-gray-500 dark:text-gray-400">Status</dt>
+                  <dd className="font-medium text-gray-900 dark:text-gray-100">{group.status}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Members</dt>
-                  <dd className="font-medium text-gray-900">
+                  <dt className="text-gray-500 dark:text-gray-400">Members</dt>
+                  <dd className="font-medium text-gray-900 dark:text-gray-100">
                     {group.members.length}/{group.maxMembers}
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Cycle</dt>
-                  <dd className="font-medium text-gray-900">
+                  <dt className="text-gray-500 dark:text-gray-400">Cycle</dt>
+                  <dd className="font-medium text-gray-900 dark:text-gray-100">
                     {group.cycleLength / 86400} days
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Pot Size</dt>
-                  <dd className="font-medium text-gray-900">
+                  <dt className="text-gray-500 dark:text-gray-400">Pot Size</dt>
+                  <dd className="font-medium text-gray-900 dark:text-gray-100">
                     {formatAmount(
                       group.contributionAmount * BigInt(group.members.length)
                     )}{" "}

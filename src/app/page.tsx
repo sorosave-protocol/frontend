@@ -39,7 +39,7 @@ export default function Home() {
         {/* How it works */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+            <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">
               How It Works
             </h2>
             <div className="grid md:grid-cols-4 gap-8">
@@ -73,10 +73,10 @@ export default function Home() {
                   <div className="w-12 h-12 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                     {item.step}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm">{item.description}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -84,9 +84,9 @@ export default function Home() {
         </section>
 
         {/* Features */}
-        <section className="bg-gray-100 py-20">
+        <section className="bg-gray-100 py-20 dark:bg-gray-900/40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+            <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">
               Why SoroSave?
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
@@ -109,12 +109,12 @@ export default function Home() {
               ].map((feature) => (
                 <div
                   key={feature.title}
-                  className="bg-white p-6 rounded-xl shadow-sm"
+                  className="rounded-xl bg-white p-6 shadow-sm dark:bg-gray-900 dark:ring-1 dark:ring-gray-800"
                 >
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
                 </div>
               ))}
             </div>
