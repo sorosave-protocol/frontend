@@ -50,15 +50,17 @@ export function ContributeModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 dark:bg-gray-900">
+        <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
           Confirm Contribution
         </h3>
 
-        <div className="bg-gray-50 rounded-lg p-4 mb-6">
+        <div className="mb-6 rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
           <div className="text-center">
-            <p className="text-sm text-gray-600 mb-1">Amount to contribute</p>
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="mb-1 text-sm text-gray-600 dark:text-gray-300">
+              Amount to contribute
+            </p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
               {formatAmount(contributionAmount)} tokens
             </p>
           </div>
@@ -73,7 +75,7 @@ export function ContributeModal({
         <div className="flex space-x-3">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+            className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
           >
             Cancel
           </button>

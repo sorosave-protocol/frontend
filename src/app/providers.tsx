@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { connectWallet, getPublicKey, isFreighterInstalled } from "@/lib/wallet";
 
 interface WalletContextType {
@@ -11,6 +17,14 @@ interface WalletContextType {
   disconnect: () => void;
 }
 
+type Theme = "light" | "dark";
+
+interface ThemeContextType {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+  toggleTheme: () => void;
+}
+
 const WalletContext = createContext<WalletContextType>({
   address: null,
   isConnected: false,
@@ -19,13 +33,43 @@ const WalletContext = createContext<WalletContextType>({
   disconnect: () => {},
 });
 
+const ThemeContext = createContext<ThemeContextType>({
+  theme: "light",
+  setTheme: () => {},
+  toggleTheme: () => {},
+});
+
 export function useWallet() {
   return useContext(WalletContext);
+}
+
+export function useTheme() {
+  return useContext(ThemeContext);
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [address, setAddress] = useState<string | null>(null);
   const [isFreighterAvailable, setIsFreighterAvailable] = useState(false);
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    const storedTheme = window.localStorage.getItem("sorosave-theme");
+    if (storedTheme === "light" || storedTheme === "dark") {
+      setTheme(storedTheme);
+      return;
+    }
+
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    setTheme(prefersDark ? "dark" : "light");
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem("sorosave-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     isFreighterInstalled().then(setIsFreighterAvailable);
@@ -44,17 +88,23 @@ export function Providers({ children }: { children: React.ReactNode }) {
     setAddress(null);
   }, []);
 
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  }, []);
+
   return (
-    <WalletContext.Provider
-      value={{
-        address,
-        isConnected: !!address,
-        isFreighterAvailable,
-        connect,
-        disconnect,
-      }}
-    >
-      {children}
-    </WalletContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+      <WalletContext.Provider
+        value={{
+          address,
+          isConnected: !!address,
+          isFreighterAvailable,
+          connect,
+          disconnect,
+        }}
+      >
+        {children}
+      </WalletContext.Provider>
+    </ThemeContext.Provider>
   );
 }
