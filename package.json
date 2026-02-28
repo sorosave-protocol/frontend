@@ -12,6 +12,7 @@
     "@sorosave/sdk": "workspace:*",
     "@stellar/freighter-api": "^2.0.0",
     "next": "^14.2.0",
+    "next-pwa": "^5.6.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },

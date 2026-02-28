@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "SoroSave — Decentralized Group Savings",
   description:
     "A decentralized rotating savings protocol built on Soroban. Create or join savings groups, contribute each cycle, and receive the pot when it's your turn.",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
