@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 import { connectWallet, getPublicKey, isFreighterInstalled } from "@/lib/wallet";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 interface WalletContextType {
   address: string | null;
@@ -54,7 +55,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disconnect,
       }}
     >
-      {children}
+      <ThemeProvider>{children}</ThemeProvider>
     </WalletContext.Provider>
   );
 }
