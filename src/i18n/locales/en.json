@@ -1,0 +1,44 @@
+{
+  "common": {
+    "appName": "SoroSave",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  },
+  "nav": {
+    "home": "Home",
+    "groups": "Groups",
+    "createGroup": "Create Group",
+    "myGroups": "My Groups",
+    "settings": "Settings"
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect",
+    "connected": "Connected",
+    "balance": "Balance"
+  },
+  "group": {
+    "create": "Create Group",
+    "join": "Join Group",
+    "leave": "Leave Group",
+    "contribute": "Contribute",
+    "members": "Members",
+    "status": "Status",
+    "contribution": "Contribution",
+    "payout": "Payout",
+    "cycles": "Cycles"
+  },
+  "status": {
+    "forming": "Forming",
+    "active": "Active",
+    "completed": "Completed",
+    "disputed": "Disputed",
+    "paused": "Paused"
+  }
+}
