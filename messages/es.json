@@ -1,0 +1,11 @@
+{
+  "Navbar": {
+    "home": "Inicio",
+    "groups": "Grupos",
+    "dashboard": "Panel"
+  },
+  "Common": {
+    "welcome": "Bienvenido a Sorosave",
+    "connectWallet": "Conectar Billetera"
+  }
+}

@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next-intl": "^3.11.0",
     "@sorosave/sdk": "workspace:*",
     "@stellar/freighter-api": "^2.0.0",
     "next": "^14.2.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
+    
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
