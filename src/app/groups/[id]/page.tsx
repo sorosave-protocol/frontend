@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
+import { StatusBadge } from "@/components/StatusBadge";
 import { useState } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
 
@@ -91,9 +92,11 @@ export default function GroupDetailPage() {
                 Group Info
               </h3>
               <dl className="space-y-2 text-sm">
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <dt className="text-gray-500">Status</dt>
-                  <dd className="font-medium text-gray-900">{group.status}</dd>
+                  <dd className="font-medium">
+                    <StatusBadge status={group.status} showIcon={false} />
+                  </dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-gray-500">Members</dt>
