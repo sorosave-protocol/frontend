@@ -4,7 +4,8 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
-import { useState } from "react";
+import { AdminPanel } from "@/components/AdminPanel";
+import { useState, useCallback } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
 
 // TODO: Fetch real data from contract
@@ -34,7 +35,12 @@ const MOCK_GROUP = {
 
 export default function GroupDetailPage() {
   const [showContributeModal, setShowContributeModal] = useState(false);
+  const [, setRefreshKey] = useState(0);
   const group = MOCK_GROUP;
+
+  const handleAdminAction = useCallback(() => {
+    setRefreshKey(k => k + 1);
+  }, []);
 
   return (
     <>
@@ -118,6 +124,14 @@ export default function GroupDetailPage() {
                 </div>
               </dl>
             </div>
+
+            <AdminPanel
+              groupId={group.id}
+              admin={group.admin}
+              members={group.members}
+              status={group.status}
+              onAction={handleAdminAction}
+            />
           </div>
         </div>
       </main>
