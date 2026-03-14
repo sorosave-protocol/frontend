@@ -14,6 +14,12 @@ export function Navbar() {
             </Link>
             <div className="hidden sm:flex space-x-4">
               <Link
+                href="/dashboard"
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
+              >
+                Dashboard
+              </Link>
+              <Link
                 href="/groups"
                 className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
               >
