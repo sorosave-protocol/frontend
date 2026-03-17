@@ -5,10 +5,10 @@ import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
 
-// TODO: Fetch real data from contract
-const MOCK_GROUP = {
+const FORMING_GROUP = {
   id: 1,
   name: "Lagos Savings Circle",
   admin: "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
@@ -21,20 +21,45 @@ const MOCK_GROUP = {
     "GEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJ",
     "GIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJKLMN",
   ],
+  payoutOrder: [],
+  currentRound: 0,
+  totalRounds: 5,
+  status: GroupStatus.Forming,
+  createdAt: 1700000000,
+};
+
+const ACTIVE_GROUP = {
+  id: 2,
+  name: "DeFi Builders Fund",
+  admin: "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
+  token: "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+  contributionAmount: 5000000000n,
+  cycleLength: 2592000,
+  maxMembers: 10,
+  members: [
+    "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
+    "GEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJ",
+    "GIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJKLMN",
+    "GMNOPQRSTUVWXYZ234567ABCDEFGHIJKLMNQRST",
+    "GQRSTUVWXYZ234567ABCDEFGHIJKLMNQRSTUVWX",
+  ],
   payoutOrder: [
     "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
     "GEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJ",
     "GIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJKLMN",
+    "GMNOPQRSTUVWXYZ234567ABCDEFGHIJKLMNQRST",
+    "GQRSTUVWXYZ234567ABCDEFGHIJKLMNQRSTUVWX",
   ],
   currentRound: 1,
-  totalRounds: 3,
+  totalRounds: 5,
   status: GroupStatus.Active,
   createdAt: 1700000000,
 };
 
 export default function GroupDetailPage() {
+  const params = useParams<{ id: string }>();
   const [showContributeModal, setShowContributeModal] = useState(false);
-  const group = MOCK_GROUP;
+  const group = params?.id === "1" ? FORMING_GROUP : ACTIVE_GROUP;
 
   return (
     <>
@@ -73,13 +98,17 @@ export default function GroupDetailPage() {
                 {group.status === GroupStatus.Active && (
                   <button
                     onClick={() => setShowContributeModal(true)}
+                    data-tour="contribute-group"
                     className="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
                   >
                     Contribute
                   </button>
                 )}
                 {group.status === GroupStatus.Forming && (
-                  <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                  <button
+                    data-tour="join-group"
+                    className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                  >
                     Join Group
                   </button>
                 )}

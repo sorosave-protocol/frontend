@@ -17,7 +17,7 @@ const PLACEHOLDER_GROUPS: SavingsGroup[] = [
     members: ["GABCD...", "GEFGH...", "GIJKL..."],
     payoutOrder: [],
     currentRound: 0,
-    totalRounds: 0,
+    totalRounds: 5,
     status: GroupStatus.Forming,
     createdAt: 1700000000,
   },

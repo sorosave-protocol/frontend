@@ -16,8 +16,11 @@ const statusColors: Record<string, string> = {
 };
 
 export function GroupCard({ group }: GroupCardProps) {
+  const tourTarget =
+    group.id === 1 ? "tour-forming-group" : group.id === 2 ? "tour-active-group" : undefined;
+
   return (
-    <Link href={`/groups/${group.id}`}>
+    <Link href={`/groups/${group.id}`} data-tour={tourTarget}>
       <div className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow cursor-pointer">
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-lg font-semibold text-gray-900">{group.name}</h3>

@@ -1,7 +1,15 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+  startTransition,
+} from "react";
 import { connectWallet, getPublicKey, isFreighterInstalled } from "@/lib/wallet";
+import { OnboardingTour } from "@/components/OnboardingTour";
 
 interface WalletContextType {
   address: string | null;
@@ -9,6 +17,10 @@ interface WalletContextType {
   isFreighterAvailable: boolean;
   connect: () => Promise<void>;
   disconnect: () => void;
+}
+
+interface OnboardingContextType {
+  startTour: () => void;
 }
 
 const WalletContext = createContext<WalletContextType>({
@@ -19,13 +31,22 @@ const WalletContext = createContext<WalletContextType>({
   disconnect: () => {},
 });
 
+const OnboardingContext = createContext<OnboardingContextType>({
+  startTour: () => {},
+});
+
 export function useWallet() {
   return useContext(WalletContext);
+}
+
+export function useOnboardingTour() {
+  return useContext(OnboardingContext);
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [address, setAddress] = useState<string | null>(null);
   const [isFreighterAvailable, setIsFreighterAvailable] = useState(false);
+  const [tourRunId, setTourRunId] = useState(0);
 
   useEffect(() => {
     isFreighterInstalled().then(setIsFreighterAvailable);
@@ -45,16 +66,27 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <WalletContext.Provider
+    <OnboardingContext.Provider
       value={{
-        address,
-        isConnected: !!address,
-        isFreighterAvailable,
-        connect,
-        disconnect,
+        startTour: () => {
+          startTransition(() => {
+            setTourRunId((value) => value + 1);
+          });
+        },
       }}
     >
-      {children}
-    </WalletContext.Provider>
+      <WalletContext.Provider
+        value={{
+          address,
+          isConnected: !!address,
+          isFreighterAvailable,
+          connect,
+          disconnect,
+        }}
+      >
+        {children}
+        <OnboardingTour runId={tourRunId} />
+      </WalletContext.Provider>
+    </OnboardingContext.Provider>
   );
 }

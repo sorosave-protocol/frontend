@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { ConnectWallet } from "./ConnectWallet";
+import { useOnboardingTour } from "@/app/providers";
 
 export function Navbar() {
+  const { startTour } = useOnboardingTour();
+
   return (
     <nav className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +30,16 @@ export function Navbar() {
               </Link>
             </div>
           </div>
-          <ConnectWallet />
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={startTour}
+              className="hidden rounded-full border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-900 sm:inline-flex"
+            >
+              Replay Tour
+            </button>
+            <ConnectWallet />
+          </div>
         </div>
       </div>
     </nav>

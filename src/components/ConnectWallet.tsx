@@ -13,6 +13,7 @@ export function ConnectWallet() {
         href="https://www.freighter.app/"
         target="_blank"
         rel="noopener noreferrer"
+        data-tour="wallet-connect"
         className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300"
       >
         Install Freighter
@@ -39,6 +40,7 @@ export function ConnectWallet() {
   return (
     <button
       onClick={connect}
+      data-tour="wallet-connect"
       className="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
     >
       Connect Wallet

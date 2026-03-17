@@ -21,6 +21,7 @@ export default function Home() {
               <div className="flex space-x-4">
                 <Link
                   href="/groups"
+                  data-tour="browse-groups"
                   className="bg-white text-primary-700 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
                 >
                   Browse Groups
