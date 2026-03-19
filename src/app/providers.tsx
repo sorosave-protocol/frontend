@@ -1,60 +1,61 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
-import { connectWallet, getPublicKey, isFreighterInstalled } from "@/lib/wallet";
+import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 
-interface WalletContextType {
-  address: string | null;
-  isConnected: boolean;
-  isFreighterAvailable: boolean;
-  connect: () => Promise<void>;
-  disconnect: () => void;
+type Network = 'testnet' | 'mainnet';
+
+interface NetworkContextType {
+  network: Network;
+  setNetwork: (network: Network) => void;
+  isLoading: boolean;
 }
 
-const WalletContext = createContext<WalletContextType>({
-  address: null,
-  isConnected: false,
-  isFreighterAvailable: false,
-  connect: async () => {},
-  disconnect: () => {},
-});
+const NetworkContext = createContext<NetworkContextType | undefined>(undefined);
 
-export function useWallet() {
-  return useContext(WalletContext);
+export const useNetwork = () => {
+  const context = useContext(NetworkContext);
+  if (context === undefined) {
+    throw new Error('useNetwork must be used within a NetworkProvider');
+  }
+  return context;
+};
+
+interface NetworkProviderProps {
+  children: ReactNode;
 }
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  const [address, setAddress] = useState<string | null>(null);
-  const [isFreighterAvailable, setIsFreighterAvailable] = useState(false);
+export const NetworkProvider = ({ children }: NetworkProviderProps) => {
+  const [network, setNetworkState] = useState<Network>('testnet');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    isFreighterInstalled().then(setIsFreighterAvailable);
-    // Try to reconnect on load
-    getPublicKey().then((key) => {
-      if (key) setAddress(key);
-    });
+    const savedNetwork = localStorage.getItem('preferred-network') as Network;
+    if (savedNetwork && (savedNetwork === 'testnet' || savedNetwork === 'mainnet')) {
+      setNetworkState(savedNetwork);
+    }
+    setIsLoading(false);
   }, []);
 
-  const connect = useCallback(async () => {
-    const addr = await connectWallet();
-    if (addr) setAddress(addr);
-  }, []);
-
-  const disconnect = useCallback(() => {
-    setAddress(null);
-  }, []);
+  const setNetwork = (newNetwork: Network) => {
+    setNetworkState(newNetwork);
+    localStorage.setItem('preferred-network', newNetwork);
+  };
 
   return (
-    <WalletContext.Provider
-      value={{
-        address,
-        isConnected: !!address,
-        isFreighterAvailable,
-        connect,
-        disconnect,
-      }}
-    >
+    <NetworkContext.Provider value={{ network, setNetwork, isLoading }}>
       {children}
-    </WalletContext.Provider>
+    </NetworkContext.Provider>
+  );
+};
+
+interface ProvidersProps {
+  children: ReactNode;
+}
+
+export default function Providers({ children }: ProvidersProps) {
+  return (
+    <NetworkProvider>
+      {children}
+    </NetworkProvider>
   );
 }
