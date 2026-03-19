@@ -6,6 +6,7 @@ import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
 import { useState } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
+import { exportContributionsCSV, exportGroupSummaryPDF, ContributionRecord } from "@/lib/export";
 
 // TODO: Fetch real data from contract
 const MOCK_GROUP = {
@@ -32,9 +33,37 @@ const MOCK_GROUP = {
   createdAt: 1700000000,
 };
 
+// Placeholder contribution history — will be fetched from contract/indexer
+const MOCK_CONTRIBUTIONS: ContributionRecord[] = [
+  {
+    date: "2024-01-15",
+    member: "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
+    amount: "1000",
+    round: 1,
+    status: "paid",
+    txHash: "abc123def456789",
+  },
+  {
+    date: "2024-01-15",
+    member: "GEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJ",
+    amount: "1000",
+    round: 1,
+    status: "paid",
+    txHash: "def789ghi012345",
+  },
+  {
+    date: "2024-01-15",
+    member: "GIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJKLMN",
+    amount: "1000",
+    round: 1,
+    status: "pending",
+  },
+];
+
 export default function GroupDetailPage() {
   const [showContributeModal, setShowContributeModal] = useState(false);
   const group = MOCK_GROUP;
+  const contributions = MOCK_CONTRIBUTIONS;
 
   return (
     <>
@@ -83,6 +112,18 @@ export default function GroupDetailPage() {
                     Join Group
                   </button>
                 )}
+                <button
+                  onClick={() => exportContributionsCSV(group, contributions)}
+                  className="w-full border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+                >
+                  Export CSV
+                </button>
+                <button
+                  onClick={() => exportGroupSummaryPDF(group, contributions)}
+                  className="w-full border border-gray-300 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+                >
+                  Export PDF
+                </button>
               </div>
             </div>
 
