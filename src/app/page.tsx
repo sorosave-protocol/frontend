@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
+import { GroupRecommendations } from "@/components/GroupRecommendations";
 
 export default function Home() {
   return (
@@ -120,6 +121,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Group Discovery / Recommendations */}
+        <GroupRecommendations />
 
         {/* Footer */}
         <footer className="bg-gray-900 text-gray-400 py-12">
