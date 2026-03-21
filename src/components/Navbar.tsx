@@ -25,6 +25,12 @@ export function Navbar() {
               >
                 Create Group
               </Link>
+              <Link
+                href="/history"
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
+              >
+                History
+              </Link>
             </div>
           </div>
           <ConnectWallet />
