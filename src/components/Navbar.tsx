@@ -15,7 +15,7 @@ export function Navbar() {
             <div className="hidden sm:flex space-x-4">
               <Link
                 href="/groups"
-                className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
+                className="tour-browse-groups text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
               >
                 Groups
               </Link>

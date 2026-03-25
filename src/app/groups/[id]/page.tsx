@@ -73,13 +73,13 @@ export default function GroupDetailPage() {
                 {group.status === GroupStatus.Active && (
                   <button
                     onClick={() => setShowContributeModal(true)}
-                    className="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
+                    className="tour-contribute w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
                   >
                     Contribute
                   </button>
                 )}
                 {group.status === GroupStatus.Forming && (
-                  <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                  <button className="tour-join-group w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
                     Join Group
                   </button>
                 )}
