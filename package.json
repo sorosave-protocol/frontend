@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sorosave/sdk": "workspace:*",
+    "@sorosave/sdk": "github:sorosave-protocol/sdk#main",
     "@stellar/freighter-api": "^2.0.0",
     "next": "^14.2.0",
     "react": "^18.3.0",

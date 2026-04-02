@@ -4,8 +4,10 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
-import { useState } from "react";
+import { ExportButton } from "@/components/ExportButton";
+import { useState, useMemo } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
+import type { GroupSummary, ContributionRecord } from "@/lib/export";
 
 // TODO: Fetch real data from contract
 const MOCK_GROUP = {
@@ -36,15 +38,50 @@ export default function GroupDetailPage() {
   const [showContributeModal, setShowContributeModal] = useState(false);
   const group = MOCK_GROUP;
 
+  // Build export summary from group data
+  const groupSummary = useMemo<GroupSummary>(() => {
+    // TODO: Replace with real contribution data from contract queries
+    const mockContributions: ContributionRecord[] = group.members.map(
+      (member, i) => ({
+        date: new Date(
+          (group.createdAt + i * group.cycleLength) * 1000,
+        ).toLocaleDateString(),
+        member,
+        amount: formatAmount(group.contributionAmount),
+        round: group.currentRound,
+        status: i === 0 ? "Confirmed" : "Pending",
+      }),
+    );
+
+    return {
+      groupName: group.name,
+      groupId: group.id,
+      admin: group.admin,
+      token: group.token,
+      contributionAmount: formatAmount(group.contributionAmount),
+      cycleLengthDays: group.cycleLength / 86400,
+      totalRounds: group.totalRounds,
+      currentRound: group.currentRound,
+      memberCount: group.members.length,
+      maxMembers: group.maxMembers,
+      status: group.status,
+      createdAt: new Date(group.createdAt * 1000).toLocaleDateString(),
+      contributions: mockContributions,
+    };
+  }, [group]);
+
   return (
     <>
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">{group.name}</h1>
-          <p className="text-gray-600 mt-1">
-            {formatAmount(group.contributionAmount)} tokens per cycle
-          </p>
+        <div className="flex justify-between items-start mb-8">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">{group.name}</h1>
+            <p className="text-gray-600 mt-1">
+              {formatAmount(group.contributionAmount)} tokens per cycle
+            </p>
+          </div>
+          <ExportButton groupSummary={groupSummary} />
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
