@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 import { connectWallet, getPublicKey, isFreighterInstalled } from "@/lib/wallet";
+import { NetworkProvider } from "@/contexts/NetworkContext";
 
 interface WalletContextType {
   address: string | null;
@@ -45,16 +46,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <WalletContext.Provider
-      value={{
-        address,
-        isConnected: !!address,
-        isFreighterAvailable,
-        connect,
-        disconnect,
-      }}
-    >
-      {children}
-    </WalletContext.Provider>
+    <NetworkProvider>
+      <WalletContext.Provider
+        value={{
+          address,
+          isConnected: !!address,
+          isFreighterAvailable,
+          connect,
+          disconnect,
+        }}
+      >
+        {children}
+      </WalletContext.Provider>
+    </NetworkProvider>
   );
 }

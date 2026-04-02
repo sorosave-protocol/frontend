@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ConnectWallet } from "./ConnectWallet";
+import { NetworkSelector } from "./NetworkSelector";
 
 export function Navbar() {
   return (
@@ -27,7 +28,10 @@ export function Navbar() {
               </Link>
             </div>
           </div>
-          <ConnectWallet />
+          <div className="flex items-center space-x-4">
+            <NetworkSelector />
+            <ConnectWallet />
+          </div>
         </div>
       </div>
     </nav>
