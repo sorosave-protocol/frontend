@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
+import { AdminPanel } from "@/components/AdminPanel";
 import { useState } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
 
@@ -35,6 +36,34 @@ const MOCK_GROUP = {
 export default function GroupDetailPage() {
   const [showContributeModal, setShowContributeModal] = useState(false);
   const group = MOCK_GROUP;
+
+  // TODO: Get from wallet connection
+  const currentAccount = MOCK_GROUP.admin;
+
+  // Admin action handlers - TODO: Wire to real contract calls
+  const handleStartGroup = async () => {
+    console.log("Starting group:", group.id);
+  };
+
+  const handlePauseGroup = async () => {
+    console.log("Pausing group:", group.id);
+  };
+
+  const handleResumeGroup = async () => {
+    console.log("Resuming group:", group.id);
+  };
+
+  const handleRemoveMember = async (member: string) => {
+    console.log("Removing member:", member, "from group:", group.id);
+  };
+
+  const handleTransferAdmin = async (newAdmin: string) => {
+    console.log("Transferring admin to:", newAdmin, "for group:", group.id);
+  };
+
+  const handleEmergencyWithdraw = async () => {
+    console.log("Emergency withdraw for group:", group.id);
+  };
 
   return (
     <>
@@ -85,6 +114,20 @@ export default function GroupDetailPage() {
                 )}
               </div>
             </div>
+
+            <AdminPanel
+              groupId={group.id}
+              status={group.status}
+              admin={group.admin}
+              currentAccount={currentAccount}
+              members={group.members}
+              onStartGroup={handleStartGroup}
+              onPauseGroup={handlePauseGroup}
+              onResumeGroup={handleResumeGroup}
+              onRemoveMember={handleRemoveMember}
+              onTransferAdmin={handleTransferAdmin}
+              onEmergencyWithdraw={handleEmergencyWithdraw}
+            />
 
             <div className="bg-white rounded-xl shadow-sm border p-6">
               <h3 className="text-sm font-semibold text-gray-900 mb-3">
