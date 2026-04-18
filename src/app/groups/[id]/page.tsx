@@ -72,6 +72,7 @@ export default function GroupDetailPage() {
               <div className="space-y-3">
                 {group.status === GroupStatus.Active && (
                   <button
+                    id="tour-contribute"
                     onClick={() => setShowContributeModal(true)}
                     className="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
                   >
@@ -79,7 +80,10 @@ export default function GroupDetailPage() {
                   </button>
                 )}
                 {group.status === GroupStatus.Forming && (
-                  <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                  <button
+                    id="tour-join-group"
+                    className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                  >
                     Join Group
                   </button>
                 )}
