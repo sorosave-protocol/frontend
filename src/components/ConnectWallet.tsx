@@ -37,11 +37,12 @@ export function ConnectWallet() {
   }
 
   return (
-    <button
-      onClick={connect}
-      className="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
-    >
-      Connect Wallet
-    </button>
+      <button
+        onClick={connect}
+        id="tour-wallet-connect"
+        className="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+      >
+        Connect Wallet
+      </button>
   );
 }
