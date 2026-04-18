@@ -33,6 +33,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
     getPublicKey().then((key) => {
       if (key) setAddress(key);
     });
+
+    // Register Service Worker
+    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch((err) => {
+        console.error("Service Worker registration failed:", err);
+      });
+    }
   }, []);
 
   const connect = useCallback(async () => {
