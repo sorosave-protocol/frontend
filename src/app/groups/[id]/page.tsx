@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
+import { GroupAnalytics } from "@/components/GroupAnalytics";
 import { useState } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
 
@@ -61,6 +62,15 @@ export default function GroupDetailPage() {
               admin={group.admin}
               payoutOrder={group.payoutOrder}
               currentRound={group.currentRound}
+            />
+
+            <GroupAnalytics
+              groupId={group.id}
+              contributionAmount={group.contributionAmount}
+              members={group.members}
+              payoutOrder={group.payoutOrder}
+              currentRound={group.currentRound}
+              totalRounds={group.totalRounds}
             />
           </div>
 
