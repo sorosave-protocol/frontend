@@ -1,133 +1,101 @@
-"use client";
-
+import { notFound } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
-import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
-import { ContributeModal } from "@/components/ContributeModal";
-import { useState } from "react";
-import { formatAmount, GroupStatus } from "@sorosave/sdk";
+import { GroupCard } from "@/components/GroupCard";
+import { exportGroupData } from "@/lib/export";
 
-// TODO: Fetch real data from contract
-const MOCK_GROUP = {
-  id: 1,
-  name: "Lagos Savings Circle",
-  admin: "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
-  token: "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
-  contributionAmount: 1000000000n,
-  cycleLength: 604800,
-  maxMembers: 5,
-  members: [
-    "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
-    "GEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJ",
-    "GIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJKLMN",
-  ],
-  payoutOrder: [
-    "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
-    "GEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJ",
-    "GIJKLMNOPQRSTUVWXYZ234567ABCDEFGHIJKLMN",
-  ],
-  currentRound: 1,
-  totalRounds: 3,
-  status: GroupStatus.Active,
-  createdAt: 1700000000,
-};
+interface Group {
+  id: string;
+  name: string;
+  description: string;
+  contributionAmount: string;
+  currentRound: number;
+  totalRounds: number;
+  members: Array<{
+    id: string;
+    name: string;
+    address: string;
+  }>;
+  contributions: Array<{
+    date: string;
+    amount: string;
+    member: string;
+    round: number;
+  }>;
+  status: string;
+}
 
-export default function GroupDetailPage() {
-  const [showContributeModal, setShowContributeModal] = useState(false);
-  const group = MOCK_GROUP;
+async function fetchGroup(id: string): Promise<Group | null> {
+  // Mock data - replace with actual API call
+  const mockGroups: Group[] = [
+    {
+      id: "1",
+      name: "Test Group",
+      description: "A test rotating savings group",
+      contributionAmount: "100",
+      currentRound: 2,
+      totalRounds: 5,
+      members: [
+        { id: "m1", name: "Alice", address: "GAABC..." },
+        { id: "m2", name: "Bob", address: "GBBCD..." },
+      ],
+      contributions: [
+        { date: "2024-01-01", amount: "100", member: "Alice", round: 1 },
+        { date: "2024-01-02", amount: "100", member: "Bob", round: 1 },
+        { date: "2024-01-03", amount: "100", member: "Alice", round: 2 },
+      ],
+      status: "active",
+    },
+  ];
+  
+  return mockGroups.find((g) => g.id === id) || null;
+}
+
+export default async function GroupDetail({ params }: { params: { id: string } }) {
+  const group = await fetchGroup(params.id);
+  
+  if (!group) {
+    notFound();
+  }
 
   return (
     <>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">{group.name}</h1>
-          <p className="text-gray-600 mt-1">
-            {formatAmount(group.contributionAmount)} tokens per cycle
-          </p>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">{group.name}</h1>
+          <div className="flex gap-2">
+            <button
+              onClick={() => exportGroupData(group, "csv")}
+              className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+            >
+              Export CSV
+            </button>
+            <button
+              onClick={() => exportGroupData(group, "pdf")}
+              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+            >
+              Export PDF
+            </button>
+          </div>
         </div>
+        
+        <p className="text-gray-600 mb-8">{group.description}</p>
 
-        <div className="grid lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <GroupCard group={group} />
+          </div>
+          <div>
             <RoundProgress
               currentRound={group.currentRound}
               totalRounds={group.totalRounds}
-              contributionsReceived={1}
+              contributionsReceived={group.contributions.length}
               totalMembers={group.members.length}
             />
-
-            <MemberList
-              members={group.members}
-              admin={group.admin}
-              payoutOrder={group.payoutOrder}
-              currentRound={group.currentRound}
-            />
-          </div>
-
-          <div className="space-y-4">
-            <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Actions
-              </h3>
-              <div className="space-y-3">
-                {group.status === GroupStatus.Active && (
-                  <button
-                    onClick={() => setShowContributeModal(true)}
-                    className="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
-                  >
-                    Contribute
-                  </button>
-                )}
-                {group.status === GroupStatus.Forming && (
-                  <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                    Join Group
-                  </button>
-                )}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">
-                Group Info
-              </h3>
-              <dl className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <dt className="text-gray-500">Status</dt>
-                  <dd className="font-medium text-gray-900">{group.status}</dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-gray-500">Members</dt>
-                  <dd className="font-medium text-gray-900">
-                    {group.members.length}/{group.maxMembers}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-gray-500">Cycle</dt>
-                  <dd className="font-medium text-gray-900">
-                    {group.cycleLength / 86400} days
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-gray-500">Pot Size</dt>
-                  <dd className="font-medium text-gray-900">
-                    {formatAmount(
-                      group.contributionAmount * BigInt(group.members.length)
-                    )}{" "}
-                    tokens
-                  </dd>
-                </div>
-              </dl>
-            </div>
           </div>
         </div>
       </main>
-
-      <ContributeModal
-        groupId={group.id}
-        contributionAmount={group.contributionAmount}
-        isOpen={showContributeModal}
-        onClose={() => setShowContributeModal(false)}
-      />
     </>
   );
 }
