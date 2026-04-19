@@ -2,8 +2,16 @@
 
 import Link from "next/link";
 import { ConnectWallet } from "./ConnectWallet";
+import { useWallet } from "@/app/providers";
 
 export function Navbar() {
+  const { currentNetwork, switchNetwork } = useWallet();
+
+  const handleNetworkChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const network = e.target.value as keyof typeof NETWORKS;
+    switchNetwork(network);
+  };
+
   return (
     <nav className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +35,18 @@ export function Navbar() {
               </Link>
             </div>
           </div>
-          <ConnectWallet />
+          <div className="flex items-center space-x-4">
+            <select
+              value={currentNetwork}
+              onChange={handleNetworkChange}
+              className="border rounded px-2 py-1 text-sm"
+              aria-label="Network selector"
+            >
+              <option value="TESTNET">Testnet</option>
+              <option value="MAINNET">Mainnet</option>
+            </select>
+            <ConnectWallet />
+          </div>
         </div>
       </div>
     </nav>
