@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { SavingsGroup, formatAmount, getStatusLabel } from "@sorosave/sdk";
+import { useState } from "react";
 
 interface GroupCardProps {
   group: SavingsGroup;
@@ -16,41 +17,57 @@ const statusColors: Record<string, string> = {
 };
 
 export function GroupCard({ group }: GroupCardProps) {
+  const [isSelected, setIsSelected] = useState(false);
+
   return (
-    <Link href={`/groups/${group.id}`}>
-      <div className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow cursor-pointer">
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">{group.name}</h3>
-          <span
-            className={`px-2 py-1 rounded-full text-xs font-medium ${
-              statusColors[group.status] || "bg-gray-100 text-gray-800"
-            }`}
-          >
-            {getStatusLabel(group.status)}
+    <div
+      className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow cursor-pointer"
+      onClick={() => setIsSelected(!isSelected)}
+    >
+      <div className="flex justify-between items-start mb-4">
+        <h3 className="text-lg font-semibold text-gray-900">{group.name}</h3>
+        <span
+          className={`px-2 py-1 rounded-full text-xs font-medium ${
+            statusColors[group.status] || "bg-gray-100 text-gray-800"
+          }`}
+        >
+          {getStatusLabel(group.status)}
+        </span>
+      </div>
+
+      <div className="space-y-2 text-sm text-gray-600">
+        <div className="flex justify-between">
+          <span>Contribution</span>
+          <span className="font-medium text-gray-900">
+            {formatAmount(group.contributionAmount)} tokens
           </span>
         </div>
-
-        <div className="space-y-2 text-sm text-gray-600">
-          <div className="flex justify-between">
-            <span>Contribution</span>
-            <span className="font-medium text-gray-900">
-              {formatAmount(group.contributionAmount)} tokens
-            </span>
-          </div>
-          <div className="flex justify-between">
-            <span>Members</span>
-            <span className="font-medium text-gray-900">
-              {group.members.length} / {group.maxMembers}
-            </span>
-          </div>
-          <div className="flex justify-between">
-            <span>Round</span>
-            <span className="font-medium text-gray-900">
-              {group.currentRound} / {group.totalRounds || group.maxMembers}
-            </span>
-          </div>
+        <div className="flex justify-between">
+          <span>Members</span>
+          <span className="font-medium text-gray-900">
+            {group.members.length} / {group.maxMembers}
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span>Round</span>
+          <span className="font-medium text-gray-900">
+            {group.currentRound} / {group.totalRounds || group.maxMembers}
+          </span>
         </div>
       </div>
-    </Link>
+
+      <div className="mt-4">
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+            checked={isSelected}
+            onChange={(e) => setIsSelected(e.target.checked)}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <span className="text-sm text-gray-700">Compare</span>
+        </label>
+      </div>
+    </div>
   );
 }

@@ -1,67 +1,125 @@
 "use client";
 
-import { Navbar } from "@/components/Navbar";
 import { GroupCard } from "@/components/GroupCard";
-import { SavingsGroup, GroupStatus } from "@sorosave/sdk";
-
-// Placeholder data for development — will be replaced with contract queries
-const PLACEHOLDER_GROUPS: SavingsGroup[] = [
-  {
-    id: 1,
-    name: "Lagos Savings Circle",
-    admin: "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
-    token: "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
-    contributionAmount: 1000000000n,
-    cycleLength: 604800,
-    maxMembers: 5,
-    members: ["GABCD...", "GEFGH...", "GIJKL..."],
-    payoutOrder: [],
-    currentRound: 0,
-    totalRounds: 0,
-    status: GroupStatus.Forming,
-    createdAt: 1700000000,
-  },
-  {
-    id: 2,
-    name: "DeFi Builders Fund",
-    admin: "GABCDEFGHIJKLMNOPQRSTUVWXYZ234567ABCDEFG",
-    token: "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
-    contributionAmount: 5000000000n,
-    cycleLength: 2592000,
-    maxMembers: 10,
-    members: ["GABCD...", "GEFGH...", "GIJKL...", "GMNOP...", "GQRST..."],
-    payoutOrder: ["GABCD...", "GEFGH...", "GIJKL...", "GMNOP...", "GQRST..."],
-    currentRound: 2,
-    totalRounds: 5,
-    status: GroupStatus.Active,
-    createdAt: 1699000000,
-  },
-];
+import { Navbar } from "@/components/Navbar";
+import { SavingsGroup } from "@sorosave/sdk";
+import { useState } from "react";
+import { GroupCompare } from "@/components/GroupCompare";
 
 export default function GroupsPage() {
-  // TODO: Replace with actual contract queries
-  const groups = PLACEHOLDER_GROUPS;
+  const [selectedGroups, setSelectedGroups] = useState<SavingsGroup[]>([]);
+  const [showCompareModal, setShowCompareModal] = useState(false);
+
+  // Mock data - replace with actual data fetching
+  const groups: SavingsGroup[] = [
+    {
+      id: "1",
+      name: "Community Savings Group",
+      status: "Active",
+      contributionAmount: 100,
+      cycleLength: 30,
+      members: Array(8).fill({}),
+      maxMembers: 10,
+      currentRound: 3,
+      totalRounds: 10,
+    },
+    {
+      id: "2",
+      name: "Tech Professionals Group",
+      status: "Forming",
+      contributionAmount: 200,
+      cycleLength: 15,
+      members: Array(5).fill({}),
+      maxMembers: 12,
+      currentRound: 0,
+      totalRounds: 12,
+    },
+    {
+      id: "3",
+      name: "Students Savings Club",
+      status: "Active",
+      contributionAmount: 50,
+      cycleLength: 45,
+      members: Array(15).fill({}),
+      maxMembers: 20,
+      currentRound: 2,
+      totalRounds: 20,
+    },
+    {
+      id: "4",
+      name: "Investors Network",
+      status: "Completed",
+      contributionAmount: 500,
+      cycleLength: 7,
+      members: Array(10).fill({}),
+      maxMembers: 10,
+      currentRound: 10,
+      totalRounds: 10,
+    },
+  ];
+
+  const handleGroupSelect = (group: SavingsGroup) => {
+    setSelectedGroups((prev) => {
+      const isAlreadySelected = prev.some((g) => g.id === group.id);
+      if (isAlreadySelected) {
+        return prev.filter((g) => g.id !== group.id);
+      }
+      if (prev.length >= 3) {
+        return prev;
+      }
+      return [...prev, group];
+    });
+  };
+
+  const handleCompareClick = () => {
+    if (selectedGroups.length > 0) {
+      setShowCompareModal(true);
+    }
+  };
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Savings Groups</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Groups</h1>
+          {selectedGroups.length > 0 && (
+            <button
+              onClick={handleCompareClick}
+              className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors flex items-center space-x-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>Compare ({selectedGroups.length})</span>
+            </button>
+          )}
         </div>
 
-        {groups.length === 0 ? (
-          <div className="text-center py-12 text-gray-500">
-            No groups found. Create the first one!
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {groups.map((group) => (
-              <GroupCard key={group.id} group={group} />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {groups.map((group) => (
+            <div key={group.id} onClick={() => handleGroupSelect(group)}>
+              <GroupCard group={group} />
+            </div>
+          ))}
+        </div>
       </main>
-    </>
+
+      {showCompareModal && (
+        <GroupCompare
+          groups={selectedGroups}
+          onClose={() => setShowCompareModal(false)}
+        />
+      )}
+    </div>
   );
 }
