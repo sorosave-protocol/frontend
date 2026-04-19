@@ -3,6 +3,7 @@
 import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
+import { GroupAnalytics } from "@/components/GroupAnalytics";
 import { ContributeModal } from "@/components/ContributeModal";
 import { useState } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
@@ -62,6 +63,8 @@ export default function GroupDetailPage() {
               payoutOrder={group.payoutOrder}
               currentRound={group.currentRound}
             />
+
+            <GroupAnalytics group={group} />
           </div>
 
           <div className="space-y-4">
