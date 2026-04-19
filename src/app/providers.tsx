@@ -19,13 +19,28 @@ const WalletContext = createContext<WalletContextType>({
   disconnect: () => {},
 });
 
+interface ThemeContextType {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: 'light',
+  toggleTheme: () => {},
+});
+
 export function useWallet() {
   return useContext(WalletContext);
+}
+
+export function useTheme() {
+  return useContext(ThemeContext);
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [address, setAddress] = useState<string | null>(null);
   const [isFreighterAvailable, setIsFreighterAvailable] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     isFreighterInstalled().then(setIsFreighterAvailable);
@@ -33,6 +48,14 @@ export function Providers({ children }: { children: React.ReactNode }) {
     getPublicKey().then((key) => {
       if (key) setAddress(key);
     });
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme as 'light' | 'dark');
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
+    }
   }, []);
 
   const connect = useCallback(async () => {
@@ -44,9 +67,17 @@ export function Providers({ children }: { children: React.ReactNode }) {
     setAddress(null);
   }, []);
 
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => {
+      const newTheme = prev === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+      return newTheme;
+    });
+  }, []);
+
   return (
     <WalletContext.Provider
-      value={{
+      value{{
         address,
         isConnected: !!address,
         isFreighterAvailable,
@@ -54,7 +85,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disconnect,
       }}
     >
-      {children}
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        {children}
+      </ThemeContext.Provider>
     </WalletContext.Provider>
   );
 }
