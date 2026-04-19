@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 import { connectWallet, getPublicKey, isFreighterInstalled } from "@/lib/wallet";
+import { NotificationProvider } from "@/components/NotificationProvider";
 
 interface WalletContextType {
   address: string | null;
@@ -54,7 +55,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disconnect,
       }}
     >
-      {children}
+      <NotificationProvider>
+        {children}
+      </NotificationProvider>
     </WalletContext.Provider>
   );
 }
