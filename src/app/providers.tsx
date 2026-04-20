@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 import { connectWallet, getPublicKey, isFreighterInstalled } from "@/lib/wallet";
+import { OnboardingTour } from "@/components/OnboardingTour";
 
 interface WalletContextType {
   address: string | null;
@@ -54,6 +55,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disconnect,
       }}
     >
+      <OnboardingTour />
       {children}
     </WalletContext.Provider>
   );
