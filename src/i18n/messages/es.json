@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "brand": "SoroSave",
+    "groups": "Grupos",
+    "createGroup": "Crear Grupo"
+  },
+  "wallet": {
+    "install": "Instalar Freighter",
+    "connect": "Conectar Billetera",
+    "disconnect": "Desconectar"
+  },
+  "home": {
+    "hero": {
+      "title": "Ahorros Grupales Descentralizados para Todos",
+      "subtitle": "SoroSave lleva el modelo tradicional de ahorros rotativos (ajo, susu, chit fund) a la blockchain de Stellar. Sin intermediarios, transparente y accesible.",
+      "browseGroups": "Ver Grupos",
+      "createGroup": "Crear un Grupo"
+    },
+    "howItWorks": {
+      "title": "Cómo Funciona",
+      "step1Title": "Crea un Grupo",
+      "step1Desc": "Establece el monto de contribución, la duración del ciclo y el máximo de miembros. Tú serás el administrador.",
+      "step2Title": "Los Miembros se Unen",
+      "step2Desc": "Comparte el enlace del grupo. Los miembros se unen hasta que el grupo esté lleno o el administrador lo inicie.",
+      "step3Title": "Contribuye Cada Ciclo",
+      "step3Desc": "Cada miembro contribuye el monto fijo en cada ronda. El contrato inteligente hace cumplir las reglas.",
+      "step4Title": "Recibe el Bote",
+      "step4Desc": "Cada ronda, un miembro recibe el bote completo. Continúa hasta que todos hayan recibido."
+    },
+    "features": {
+      "title": "¿Por Qué SoroSave?",
+      "trustlessTitle": "Sin Confianza Ciega",
+      "trustlessDesc": "Los contratos inteligentes garantizan las contribuciones y los pagos. No se necesita intermediario.",
+      "transparentTitle": "Transparente",
+      "transparentDesc": "Todas las transacciones están en cadena. Cada miembro puede verificar el estado del grupo.",
+      "lowCostTitle": "Bajo Costo",
+      "lowCostDesc": "Construido sobre Soroban (Stellar). Las tarifas de transacción son una fracción de un centavo."
+    },
+    "footer": {
+      "tagline": "Protocolo de ahorros grupales descentralizado de código abierto en Soroban.",
+      "github": "GitHub",
+      "docs": "Docs",
+      "discord": "Discord"
+    }
+  },
+  "groups": {
+    "title": "Grupos de Ahorro",
+    "noGroups": "No se encontraron grupos. ¡Crea el primero!",
+    "contribution": "Contribución",
+    "members": "Miembros",
+    "round": "Ronda",
+    "tokens": "tokens"
+  },
+  "newGroup": {
+    "title": "Crear un Grupo de Ahorro",
+    "connectWalletPrompt": "Por favor, conecta tu billetera para crear un grupo.",
+    "groupName": "Nombre del Grupo",
+    "groupNamePlaceholder": "Mi Círculo de Ahorro",
+    "tokenAddress": "Dirección del Contrato del Token",
+    "tokenAddressPlaceholder": "CDLZ...",
+    "contributionAmount": "Monto de Contribución (por ciclo)",
+    "contributionAmountPlaceholder": "1000000000",
+    "cycleLength": "Duración del Ciclo (segundos)",
+    "maxMembers": "Máximo de Miembros",
+    "createButton": "Crear Grupo",
+    "creating": "Creando...",
+    "successMessage": "¡Grupo creado exitosamente!"
+  },
+  "groupDetail": {
+    "tokensPerCycle": "tokens por ciclo",
+    "actions": "Acciones",
+    "contribute": "Contribuir",
+    "closeModal": "Cerrar"
+  }
+}

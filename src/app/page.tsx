@@ -1,7 +1,48 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/Navbar";
 
 export default function Home() {
+  const t = useTranslations("home");
+
+  const howItWorksSteps = [
+    {
+      step: "1",
+      title: t("howItWorks.step1Title"),
+      description: t("howItWorks.step1Desc"),
+    },
+    {
+      step: "2",
+      title: t("howItWorks.step2Title"),
+      description: t("howItWorks.step2Desc"),
+    },
+    {
+      step: "3",
+      title: t("howItWorks.step3Title"),
+      description: t("howItWorks.step3Desc"),
+    },
+    {
+      step: "4",
+      title: t("howItWorks.step4Title"),
+      description: t("howItWorks.step4Desc"),
+    },
+  ];
+
+  const features = [
+    {
+      title: t("features.trustlessTitle"),
+      description: t("features.trustlessDesc"),
+    },
+    {
+      title: t("features.transparentTitle"),
+      description: t("features.transparentDesc"),
+    },
+    {
+      title: t("features.lowCostTitle"),
+      description: t("features.lowCostDesc"),
+    },
+  ];
+
   return (
     <>
       <Navbar />
@@ -11,25 +52,23 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
             <div className="max-w-3xl">
               <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-                Decentralized Group Savings for Everyone
+                {t("hero.title")}
               </h1>
               <p className="text-xl text-primary-100 mb-8">
-                SoroSave brings the traditional rotating savings model (ajo,
-                susu, chit fund) to the Stellar blockchain. Trustless,
-                transparent, and accessible.
+                {t("hero.subtitle")}
               </p>
               <div className="flex space-x-4">
                 <Link
                   href="/groups"
                   className="bg-white text-primary-700 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
                 >
-                  Browse Groups
+                  {t("hero.browseGroups")}
                 </Link>
                 <Link
                   href="/groups/new"
                   className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
                 >
-                  Create a Group
+                  {t("hero.createGroup")}
                 </Link>
               </div>
             </div>
@@ -40,35 +79,10 @@ export default function Home() {
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              How It Works
+              {t("howItWorks.title")}
             </h2>
             <div className="grid md:grid-cols-4 gap-8">
-              {[
-                {
-                  step: "1",
-                  title: "Create a Group",
-                  description:
-                    "Set contribution amount, cycle length, and max members. You become the admin.",
-                },
-                {
-                  step: "2",
-                  title: "Members Join",
-                  description:
-                    "Share the group link. Members join until the group is full or the admin starts it.",
-                },
-                {
-                  step: "3",
-                  title: "Contribute Each Cycle",
-                  description:
-                    "Every member contributes the fixed amount each round. Smart contract enforces rules.",
-                },
-                {
-                  step: "4",
-                  title: "Receive the Pot",
-                  description:
-                    "Each round, one member receives the full pot. Continues until everyone has received.",
-                },
-              ].map((item) => (
+              {howItWorksSteps.map((item) => (
                 <div key={item.step} className="text-center">
                   <div className="w-12 h-12 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                     {item.step}
@@ -87,26 +101,10 @@ export default function Home() {
         <section className="bg-gray-100 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              Why SoroSave?
+              {t("features.title")}
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Trustless",
-                  description:
-                    "Smart contracts enforce contributions and payouts. No middleman needed.",
-                },
-                {
-                  title: "Transparent",
-                  description:
-                    "All transactions are on-chain. Every member can verify the group state.",
-                },
-                {
-                  title: "Low Cost",
-                  description:
-                    "Built on Soroban (Stellar). Transaction fees are a fraction of a cent.",
-                },
-              ].map((feature) => (
+              {features.map((feature) => (
                 <div
                   key={feature.title}
                   className="bg-white p-6 rounded-xl shadow-sm"
@@ -125,21 +123,19 @@ export default function Home() {
         <footer className="bg-gray-900 text-gray-400 py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-lg font-semibold text-white mb-2">SoroSave</p>
-            <p className="text-sm">
-              Open-source decentralized group savings protocol on Soroban.
-            </p>
+            <p className="text-sm">{t("footer.tagline")}</p>
             <div className="mt-4 space-x-4 text-sm">
               <a
                 href="https://github.com/big14way/sorosave"
                 className="hover:text-white"
               >
-                GitHub
+                {t("footer.github")}
               </a>
               <a href="#" className="hover:text-white">
-                Docs
+                {t("footer.docs")}
               </a>
               <a href="#" className="hover:text-white">
-                Discord
+                {t("footer.discord")}
               </a>
             </div>
           </div>
