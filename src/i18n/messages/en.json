@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "brand": "SoroSave",
+    "groups": "Groups",
+    "createGroup": "Create Group"
+  },
+  "wallet": {
+    "install": "Install Freighter",
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect"
+  },
+  "home": {
+    "hero": {
+      "title": "Decentralized Group Savings for Everyone",
+      "subtitle": "SoroSave brings the traditional rotating savings model (ajo, susu, chit fund) to the Stellar blockchain. Trustless, transparent, and accessible.",
+      "browseGroups": "Browse Groups",
+      "createGroup": "Create a Group"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1Title": "Create a Group",
+      "step1Desc": "Set contribution amount, cycle length, and max members. You become the admin.",
+      "step2Title": "Members Join",
+      "step2Desc": "Share the group link. Members join until the group is full or the admin starts it.",
+      "step3Title": "Contribute Each Cycle",
+      "step3Desc": "Every member contributes the fixed amount each round. Smart contract enforces rules.",
+      "step4Title": "Receive the Pot",
+      "step4Desc": "Each round, one member receives the full pot. Continues until everyone has received."
+    },
+    "features": {
+      "title": "Why SoroSave?",
+      "trustlessTitle": "Trustless",
+      "trustlessDesc": "Smart contracts enforce contributions and payouts. No middleman needed.",
+      "transparentTitle": "Transparent",
+      "transparentDesc": "All transactions are on-chain. Every member can verify the group state.",
+      "lowCostTitle": "Low Cost",
+      "lowCostDesc": "Built on Soroban (Stellar). Transaction fees are a fraction of a cent."
+    },
+    "footer": {
+      "tagline": "Open-source decentralized group savings protocol on Soroban.",
+      "github": "GitHub",
+      "docs": "Docs",
+      "discord": "Discord"
+    }
+  },
+  "groups": {
+    "title": "Savings Groups",
+    "noGroups": "No groups found. Create the first one!",
+    "contribution": "Contribution",
+    "members": "Members",
+    "round": "Round",
+    "tokens": "tokens"
+  },
+  "newGroup": {
+    "title": "Create a Savings Group",
+    "connectWalletPrompt": "Please connect your wallet to create a group.",
+    "groupName": "Group Name",
+    "groupNamePlaceholder": "My Savings Circle",
+    "tokenAddress": "Token Contract Address",
+    "tokenAddressPlaceholder": "CDLZ...",
+    "contributionAmount": "Contribution Amount (per cycle)",
+    "contributionAmountPlaceholder": "1000000000",
+    "cycleLength": "Cycle Length (seconds)",
+    "maxMembers": "Max Members",
+    "createButton": "Create Group",
+    "creating": "Creating...",
+    "successMessage": "Group created successfully!"
+  },
+  "groupDetail": {
+    "tokensPerCycle": "tokens per cycle",
+    "actions": "Actions",
+    "contribute": "Contribute",
+    "closeModal": "Close"
+  }
+}

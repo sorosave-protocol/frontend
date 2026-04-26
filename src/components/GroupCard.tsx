@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { SavingsGroup, formatAmount, getStatusLabel } from "@sorosave/sdk";
 
 interface GroupCardProps {
@@ -16,6 +17,8 @@ const statusColors: Record<string, string> = {
 };
 
 export function GroupCard({ group }: GroupCardProps) {
+  const t = useTranslations("groups");
+
   return (
     <Link href={`/groups/${group.id}`}>
       <div className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow cursor-pointer">
@@ -32,19 +35,19 @@ export function GroupCard({ group }: GroupCardProps) {
 
         <div className="space-y-2 text-sm text-gray-600">
           <div className="flex justify-between">
-            <span>Contribution</span>
+            <span>{t("contribution")}</span>
             <span className="font-medium text-gray-900">
-              {formatAmount(group.contributionAmount)} tokens
+              {formatAmount(group.contributionAmount)} {t("tokens")}
             </span>
           </div>
           <div className="flex justify-between">
-            <span>Members</span>
+            <span>{t("members")}</span>
             <span className="font-medium text-gray-900">
               {group.members.length} / {group.maxMembers}
             </span>
           </div>
           <div className="flex justify-between">
-            <span>Round</span>
+            <span>{t("round")}</span>
             <span className="font-medium text-gray-900">
               {group.currentRound} / {group.totalRounds || group.maxMembers}
             </span>

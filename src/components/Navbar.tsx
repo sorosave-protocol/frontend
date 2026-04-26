@@ -1,33 +1,43 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ConnectWallet } from "./ConnectWallet";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useCookieLocale } from "@/hooks/useCookieLocale";
 
 export function Navbar() {
+  const t = useTranslations("nav");
+  const tWallet = useTranslations("wallet");
+  const currentLocale = useCookieLocale();
+
   return (
     <nav className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center space-x-8">
             <Link href="/" className="text-xl font-bold text-primary-700">
-              SoroSave
+              {t("brand")}
             </Link>
             <div className="hidden sm:flex space-x-4">
               <Link
                 href="/groups"
                 className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
               >
-                Groups
+                {t("groups")}
               </Link>
               <Link
                 href="/groups/new"
                 className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
               >
-                Create Group
+                {t("createGroup")}
               </Link>
             </div>
           </div>
-          <ConnectWallet />
+          <div className="flex items-center space-x-3">
+            <LanguageSwitcher currentLocale={currentLocale} />
+            <ConnectWallet />
+          </div>
         </div>
       </div>
     </nav>
