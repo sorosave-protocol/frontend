@@ -1,6 +1,7 @@
 "use client";
 
 import { shortenAddress } from "@sorosave/sdk";
+import { useTranslations } from "next-intl";
 
 interface MemberListProps {
   members: string[];
@@ -15,9 +16,13 @@ export function MemberList({
   payoutOrder,
   currentRound,
 }: MemberListProps) {
+  const t = useTranslations("memberList");
+
   return (
     <div className="bg-white rounded-xl shadow-sm border p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Members</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        {t("title")}
+      </h3>
       <div className="space-y-3">
         {members.map((member, index) => {
           const payoutRound =
@@ -42,7 +47,7 @@ export function MemberList({
                   </span>
                   {member === admin && (
                     <span className="ml-2 text-xs bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full">
-                      Admin
+                      {t("admin")}
                     </span>
                   )}
                 </div>
@@ -50,17 +55,17 @@ export function MemberList({
               <div>
                 {isCurrentRecipient && (
                   <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                    Current Recipient
+                    {t("currentRecipient")}
                   </span>
                 )}
                 {hasReceived && (
                   <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                    Received
+                    {t("received")}
                   </span>
                 )}
                 {payoutRound && !hasReceived && !isCurrentRecipient && (
                   <span className="text-xs text-gray-500">
-                    Round {payoutRound}
+                    {t("round", { round: payoutRound })}
                   </span>
                 )}
               </div>

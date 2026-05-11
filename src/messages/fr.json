@@ -1,0 +1,152 @@
+{
+  "common": {
+    "tokens": "jetons"
+  },
+  "status": {
+    "forming": "En formation",
+    "active": "Actif",
+    "completed": "Terminé",
+    "disputed": "Contesté",
+    "paused": "En pause",
+    "unknown": "Inconnu"
+  },
+  "nav": {
+    "groups": "Groupes",
+    "createGroup": "Créer un groupe"
+  },
+  "language": {
+    "label": "Langue",
+    "en": "English",
+    "fr": "Français"
+  },
+  "wallet": {
+    "installFreighter": "Installer Freighter",
+    "disconnect": "Déconnecter",
+    "connectWallet": "Connecter le wallet"
+  },
+  "home": {
+    "hero": {
+      "title": "Épargne collective décentralisée pour tous",
+      "description": "SoroSave apporte le modèle traditionnel d'épargne rotative (ajo, susu, tontine) à la blockchain Stellar. Sans tiers de confiance, transparent et accessible.",
+      "browseGroups": "Voir les groupes",
+      "createGroup": "Créer un groupe"
+    },
+    "how": {
+      "title": "Comment ça marche",
+      "steps": {
+        "one": {
+          "step": "1",
+          "title": "Créez un groupe",
+          "description": "Définissez le montant de contribution, la durée du cycle et le nombre maximal de membres. Vous devenez l'administrateur."
+        },
+        "two": {
+          "step": "2",
+          "title": "Les membres rejoignent",
+          "description": "Partagez le lien du groupe. Les membres rejoignent jusqu'à ce que le groupe soit complet ou que l'administrateur le démarre."
+        },
+        "three": {
+          "step": "3",
+          "title": "Contribuez à chaque cycle",
+          "description": "Chaque membre verse le montant fixe à chaque tour. Le smart contract applique les règles."
+        },
+        "four": {
+          "step": "4",
+          "title": "Recevez la cagnotte",
+          "description": "À chaque tour, un membre reçoit toute la cagnotte. Le cycle continue jusqu'à ce que chacun ait reçu sa part."
+        }
+      }
+    },
+    "features": {
+      "title": "Pourquoi SoroSave ?",
+      "items": {
+        "trustless": {
+          "title": "Sans tiers de confiance",
+          "description": "Les smart contracts appliquent les contributions et les paiements. Aucun intermédiaire n'est nécessaire."
+        },
+        "transparent": {
+          "title": "Transparent",
+          "description": "Toutes les transactions sont on-chain. Chaque membre peut vérifier l'état du groupe."
+        },
+        "lowCost": {
+          "title": "Faible coût",
+          "description": "Construit sur Soroban (Stellar). Les frais de transaction sont inférieurs à un centime."
+        }
+      }
+    },
+    "footer": {
+      "description": "Protocole open source d'épargne collective décentralisée sur Soroban.",
+      "docs": "Docs",
+      "discord": "Discord"
+    }
+  },
+  "groups": {
+    "title": "Groupes d'épargne",
+    "empty": "Aucun groupe trouvé. Créez le premier !"
+  },
+  "groupCard": {
+    "contribution": "Contribution",
+    "members": "Membres",
+    "round": "Tour"
+  },
+  "newGroup": {
+    "title": "Créer un groupe d'épargne"
+  },
+  "createGroup": {
+    "notConnected": "Connectez votre wallet pour créer un groupe.",
+    "nameLabel": "Nom du groupe",
+    "namePlaceholder": "Mon cercle d'épargne",
+    "tokenLabel": "Adresse du contrat du jeton",
+    "tokenPlaceholder": "CDLZ...",
+    "contributionLabel": "Montant de contribution (par cycle)",
+    "contributionPlaceholder": "100",
+    "cycleLengthLabel": "Durée du cycle (secondes)",
+    "maxMembersLabel": "Nombre maximal de membres",
+    "success": "Groupe créé avec succès !",
+    "loading": "Création...",
+    "submit": "Créer le groupe d'épargne",
+    "errors": {
+      "failed": "Échec de la création du groupe"
+    },
+    "cycleOptions": {
+      "hour": "1 heure",
+      "day": "1 jour",
+      "week": "1 semaine",
+      "month": "1 mois"
+    }
+  },
+  "groupDetail": {
+    "tokensPerCycle": "{amount} jetons par cycle",
+    "actions": "Actions",
+    "contribute": "Contribuer",
+    "joinGroup": "Rejoindre le groupe",
+    "info": "Infos du groupe",
+    "status": "Statut",
+    "members": "Membres",
+    "cycle": "Cycle",
+    "days": "{count} jours",
+    "potSize": "Taille de la cagnotte"
+  },
+  "contributeModal": {
+    "title": "Confirmer la contribution",
+    "amountLabel": "Montant à contribuer",
+    "cancel": "Annuler",
+    "loading": "Confirmation...",
+    "submit": "Contribuer",
+    "errors": {
+      "failed": "Échec de la contribution"
+    }
+  },
+  "memberList": {
+    "title": "Membres",
+    "admin": "Admin",
+    "currentRecipient": "Bénéficiaire actuel",
+    "received": "Reçu",
+    "round": "Tour {round}"
+  },
+  "roundProgress": {
+    "title": "Progression",
+    "overall": "Progression globale",
+    "roundOf": "Tour {currentRound} sur {totalRounds}",
+    "currentContributions": "Contributions du tour actuel"
+  }
+}

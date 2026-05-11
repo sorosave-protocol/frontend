@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { SavingsGroup, formatAmount, getStatusLabel } from "@sorosave/sdk";
+import { useLocale, useTranslations } from "next-intl";
 
 interface GroupCardProps {
   group: SavingsGroup;
@@ -15,9 +16,23 @@ const statusColors: Record<string, string> = {
   Paused: "bg-yellow-100 text-yellow-800",
 };
 
+const statusMessageKeys: Record<string, string> = {
+  Forming: "forming",
+  Active: "active",
+  Completed: "completed",
+  Disputed: "disputed",
+  Paused: "paused",
+};
+
 export function GroupCard({ group }: GroupCardProps) {
+  const locale = useLocale();
+  const t = useTranslations("groupCard");
+  const common = useTranslations("common");
+  const status = useTranslations("status");
+  const statusLabel = getStatusLabel(group.status);
+
   return (
-    <Link href={`/groups/${group.id}`}>
+    <Link href={`/${locale}/groups/${group.id}`}>
       <div className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition-shadow cursor-pointer">
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-lg font-semibold text-gray-900">{group.name}</h3>
@@ -26,25 +41,25 @@ export function GroupCard({ group }: GroupCardProps) {
               statusColors[group.status] || "bg-gray-100 text-gray-800"
             }`}
           >
-            {getStatusLabel(group.status)}
+            {status(statusMessageKeys[statusLabel] ?? "unknown")}
           </span>
         </div>
 
         <div className="space-y-2 text-sm text-gray-600">
           <div className="flex justify-between">
-            <span>Contribution</span>
+            <span>{t("contribution")}</span>
             <span className="font-medium text-gray-900">
-              {formatAmount(group.contributionAmount)} tokens
+              {formatAmount(group.contributionAmount)} {common("tokens")}
             </span>
           </div>
           <div className="flex justify-between">
-            <span>Members</span>
+            <span>{t("members")}</span>
             <span className="font-medium text-gray-900">
               {group.members.length} / {group.maxMembers}
             </span>
           </div>
           <div className="flex justify-between">
-            <span>Round</span>
+            <span>{t("round")}</span>
             <span className="font-medium text-gray-900">
               {group.currentRound} / {group.totalRounds || group.maxMembers}
             </span>
