@@ -3,6 +3,7 @@
 import { Navbar } from "@/components/Navbar";
 import { GroupCard } from "@/components/GroupCard";
 import { SavingsGroup, GroupStatus } from "@sorosave/sdk";
+import { useTranslations } from "next-intl";
 
 // Placeholder data for development — will be replaced with contract queries
 const PLACEHOLDER_GROUPS: SavingsGroup[] = [
@@ -41,18 +42,19 @@ const PLACEHOLDER_GROUPS: SavingsGroup[] = [
 export default function GroupsPage() {
   // TODO: Replace with actual contract queries
   const groups = PLACEHOLDER_GROUPS;
+  const t = useTranslations("groups");
 
   return (
     <>
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Savings Groups</h1>
+          <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
         </div>
 
         {groups.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
-            No groups found. Create the first one!
+            {t("empty")}
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
