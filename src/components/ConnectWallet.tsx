@@ -1,29 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { useWallet } from "@/app/providers";
 import { shortenAddress } from "@sorosave/sdk";
+import { WalletSelectModal } from "./WalletSelectModal";
 
 export function ConnectWallet() {
-  const { address, isConnected, isFreighterAvailable, connect, disconnect } =
-    useWallet();
-
-  if (!isFreighterAvailable) {
-    return (
-      <a
-        href="https://www.freighter.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300"
-      >
-        Install Freighter
-      </a>
-    );
-  }
+  const { address, isConnected, activeWallet, disconnect } = useWallet();
+  const [modalOpen, setModalOpen] = useState(false);
 
   if (isConnected && address) {
     return (
       <div className="flex items-center space-x-3">
         <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+          {activeWallet ? `${activeWallet.name} · ` : ""}
           {shortenAddress(address)}
         </span>
         <button
@@ -37,11 +27,17 @@ export function ConnectWallet() {
   }
 
   return (
-    <button
-      onClick={connect}
-      className="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
-    >
-      Connect Wallet
-    </button>
+    <>
+      <button
+        onClick={() => setModalOpen(true)}
+        className="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+      >
+        Connect Wallet
+      </button>
+      <WalletSelectModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+      />
+    </>
   );
 }
