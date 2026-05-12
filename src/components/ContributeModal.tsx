@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { useWallet } from "@/app/providers";
-import { sorosaveClient, NETWORK_PASSPHRASE } from "@/lib/sorosave";
+import { sorosaveClient } from "@/lib/sorosave";
 import { formatAmount } from "@sorosave/sdk";
-import { signTransaction } from "@/lib/wallet";
 
 interface ContributeModalProps {
   groupId: number;
@@ -19,7 +18,7 @@ export function ContributeModal({
   isOpen,
   onClose,
 }: ContributeModalProps) {
-  const { address } = useWallet();
+  const { address, signTransaction } = useWallet();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,10 +32,7 @@ export function ContributeModal({
 
     try {
       const tx = await sorosaveClient.contribute(address, groupId, address);
-      const signedXdr = await signTransaction(
-        tx.toXDR(),
-        NETWORK_PASSPHRASE
-      );
+      const signedXdr = await signTransaction(tx.toXDR());
 
       // TODO: Submit signed transaction
       console.log("Signed contribution:", signedXdr);

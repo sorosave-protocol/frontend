@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 import { useWallet } from "@/app/providers";
-import { sorosaveClient, NETWORK_PASSPHRASE } from "@/lib/sorosave";
+import { sorosaveClient } from "@/lib/sorosave";
 import { parseAmount } from "@sorosave/sdk";
-import { signTransaction } from "@/lib/wallet";
 
 export function CreateGroupForm() {
-  const { address, isConnected } = useWallet();
+  const { address, isConnected, signTransaction } = useWallet();
   const [name, setName] = useState("");
   const [tokenAddress, setTokenAddress] = useState("");
   const [contributionAmount, setContributionAmount] = useState("");
@@ -36,10 +35,7 @@ export function CreateGroupForm() {
         address
       );
 
-      const signedXdr = await signTransaction(
-        tx.toXDR(),
-        NETWORK_PASSPHRASE
-      );
+      const signedXdr = await signTransaction(tx.toXDR());
 
       // TODO: Submit signed transaction to network
       console.log("Signed transaction:", signedXdr);
