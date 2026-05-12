@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { MemberList } from "@/components/MemberList";
 import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
+import { AdminPanel } from "@/components/AdminPanel";
 import { useState } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
 
@@ -85,6 +86,13 @@ export default function GroupDetailPage() {
                 )}
               </div>
             </div>
+
+            <AdminPanel
+              groupId={group.id}
+              admin={group.admin}
+              status={group.status}
+              members={group.members}
+            />
 
             <div className="bg-white rounded-xl shadow-sm border p-6">
               <h3 className="text-sm font-semibold text-gray-900 mb-3">
