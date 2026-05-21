@@ -1,0 +1,142 @@
+{
+  "Metadata": {
+    "title": "SoroSave - Epargne de groupe decentralisee",
+    "description": "Un protocole d'epargne rotative decentralise construit sur Soroban. Creez ou rejoignez des groupes d'epargne, contribuez a chaque cycle et recevez la cagnotte lorsque vient votre tour."
+  },
+  "Navbar": {
+    "groups": "Groupes",
+    "createGroup": "Creer un groupe",
+    "language": "Langue"
+  },
+  "LanguageSwitcher": {
+    "label": "Langue",
+    "en": "Anglais",
+    "fr": "Francais"
+  },
+  "Wallet": {
+    "installFreighter": "Installer Freighter",
+    "disconnect": "Deconnecter",
+    "connect": "Connecter le portefeuille"
+  },
+  "Home": {
+    "heroTitle": "Epargne de groupe decentralisee pour tous",
+    "heroDescription": "SoroSave apporte le modele traditionnel d'epargne rotative (ajo, susu, tontine) a la blockchain Stellar. Sans confiance, transparent et accessible.",
+    "browseGroups": "Parcourir les groupes",
+    "createGroup": "Creer un groupe",
+    "howItWorks": "Comment ca marche",
+    "steps": {
+      "create": {
+        "title": "Creez un groupe",
+        "description": "Definissez le montant de contribution, la duree du cycle et le nombre maximum de membres. Vous devenez l'administrateur."
+      },
+      "join": {
+        "title": "Les membres rejoignent",
+        "description": "Partagez le lien du groupe. Les membres rejoignent jusqu'a ce que le groupe soit complet ou que l'administrateur le demarre."
+      },
+      "contribute": {
+        "title": "Contribuez a chaque cycle",
+        "description": "Chaque membre contribue le montant fixe a chaque tour. Le contrat intelligent applique les regles."
+      },
+      "payout": {
+        "title": "Recevez la cagnotte",
+        "description": "A chaque tour, un membre recoit toute la cagnotte. Le cycle continue jusqu'a ce que tout le monde ait recu."
+      }
+    },
+    "why": "Pourquoi SoroSave ?",
+    "features": {
+      "trustless": {
+        "title": "Sans intermediaire",
+        "description": "Les contrats intelligents appliquent les contributions et les versements. Aucun tiers n'est necessaire."
+      },
+      "transparent": {
+        "title": "Transparent",
+        "description": "Toutes les transactions sont en chaine. Chaque membre peut verifier l'etat du groupe."
+      },
+      "lowCost": {
+        "title": "Faible cout",
+        "description": "Construit sur Soroban (Stellar). Les frais de transaction representent une fraction de centime."
+      }
+    },
+    "footerDescription": "Protocole open source d'epargne de groupe decentralisee sur Soroban.",
+    "github": "GitHub",
+    "docs": "Docs",
+    "discord": "Discord"
+  },
+  "Groups": {
+    "title": "Groupes d'epargne",
+    "empty": "Aucun groupe trouve. Creez le premier !"
+  },
+  "GroupCard": {
+    "contribution": "Contribution",
+    "members": "Membres",
+    "round": "Tour",
+    "tokens": "{amount} jetons"
+  },
+  "GroupStatus": {
+    "Forming": "En formation",
+    "Active": "Actif",
+    "Completed": "Termine",
+    "Disputed": "Conteste",
+    "Paused": "En pause"
+  },
+  "GroupDetail": {
+    "tokensPerCycle": "{amount} jetons par cycle",
+    "actions": "Actions",
+    "contribute": "Contribuer",
+    "joinGroup": "Rejoindre le groupe",
+    "groupInfo": "Infos du groupe",
+    "status": "Statut",
+    "members": "Membres",
+    "cycle": "Cycle",
+    "days": "{days} jours",
+    "potSize": "Montant de la cagnotte",
+    "tokens": "{amount} jetons"
+  },
+  "NewGroup": {
+    "title": "Creer un groupe d'epargne"
+  },
+  "CreateGroupForm": {
+    "connectPrompt": "Veuillez connecter votre portefeuille pour creer un groupe.",
+    "groupName": "Nom du groupe",
+    "groupNamePlaceholder": "Mon cercle d'epargne",
+    "tokenAddress": "Adresse du contrat du jeton",
+    "tokenAddressPlaceholder": "CDLZ...",
+    "contributionAmount": "Montant de contribution (par cycle)",
+    "contributionAmountPlaceholder": "100",
+    "cycleLength": "Duree du cycle (secondes)",
+    "maxMembers": "Membres maximum",
+    "durations": {
+      "hour": "1 heure",
+      "day": "1 jour",
+      "week": "1 semaine",
+      "month": "1 mois"
+    },
+    "success": "Groupe cree avec succes !",
+    "fallbackError": "Echec de creation du groupe",
+    "creating": "Creation...",
+    "submit": "Creer le groupe d'epargne"
+  },
+  "ContributeModal": {
+    "title": "Confirmer la contribution",
+    "amountLabel": "Montant a contribuer",
+    "tokens": "{amount} jetons",
+    "fallbackError": "Echec de la contribution",
+    "cancel": "Annuler",
+    "confirming": "Confirmation...",
+    "contribute": "Contribuer"
+  },
+  "MemberList": {
+    "title": "Membres",
+    "admin": "Admin",
+    "currentRecipient": "Beneficiaire actuel",
+    "received": "Recu",
+    "round": "Tour {round}"
+  },
+  "RoundProgress": {
+    "title": "Progression",
+    "overall": "Progression globale",
+    "roundOfTotal": "Tour {currentRound} sur {totalRounds}",
+    "currentContributions": "Contributions du tour actuel",
+    "contributionCount": "{received} / {total}"
+  }
+}

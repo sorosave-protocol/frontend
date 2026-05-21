@@ -1,9 +1,11 @@
 "use client";
 
 import { useWallet } from "@/app/providers";
+import { useTranslations } from "next-intl";
 import { shortenAddress } from "@sorosave/sdk";
 
 export function ConnectWallet() {
+  const t = useTranslations("Wallet");
   const { address, isConnected, isFreighterAvailable, connect, disconnect } =
     useWallet();
 
@@ -15,7 +17,7 @@ export function ConnectWallet() {
         rel="noopener noreferrer"
         className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300"
       >
-        Install Freighter
+        {t("installFreighter")}
       </a>
     );
   }
@@ -30,7 +32,7 @@ export function ConnectWallet() {
           onClick={disconnect}
           className="text-sm text-red-600 hover:text-red-800"
         >
-          Disconnect
+          {t("disconnect")}
         </button>
       </div>
     );
@@ -41,7 +43,7 @@ export function ConnectWallet() {
       onClick={connect}
       className="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
     >
-      Connect Wallet
+      {t("connect")}
     </button>
   );
 }
