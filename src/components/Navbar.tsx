@@ -1,9 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { ConnectWallet } from "./ConnectWallet";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function Navbar() {
+  const t = useTranslations("Navbar");
+
   return (
     <nav className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,17 +21,20 @@ export function Navbar() {
                 href="/groups"
                 className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
               >
-                Groups
+                {t("groups")}
               </Link>
               <Link
                 href="/groups/new"
                 className="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
               >
-                Create Group
+                {t("createGroup")}
               </Link>
             </div>
           </div>
-          <ConnectWallet />
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <ConnectWallet />
+          </div>
         </div>
       </div>
     </nav>
