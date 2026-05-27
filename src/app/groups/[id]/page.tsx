@@ -6,6 +6,7 @@ import { RoundProgress } from "@/components/RoundProgress";
 import { ContributeModal } from "@/components/ContributeModal";
 import { useState } from "react";
 import { formatAmount, GroupStatus } from "@sorosave/sdk";
+import { exportToCSV, exportToPDF, type GroupExportData } from "@/lib/export";
 
 // TODO: Fetch real data from contract
 const MOCK_GROUP = {
@@ -34,7 +35,36 @@ const MOCK_GROUP = {
 
 export default function GroupDetailPage() {
   const [showContributeModal, setShowContributeModal] = useState(false);
+  const [exporting, setExporting] = useState<"csv" | "pdf" | null>(null);
   const group = MOCK_GROUP;
+
+  const buildExportData = (): GroupExportData => ({
+    groupName: group.name,
+    admin: group.admin,
+    totalRounds: group.totalRounds,
+    currentRound: group.currentRound,
+    members: group.members,
+    payoutOrder: group.payoutOrder,
+    cycleLength: group.cycleLength,
+    contributionAmount: formatAmount(group.contributionAmount),
+    contributions: group.members.map((m, i) => ({
+      round: group.currentRound,
+      member: m,
+      amount: formatAmount(group.contributionAmount),
+      date: new Date(group.createdAt * 1000).toLocaleDateString(),
+      status: i === 0 ? "paid" : "pending",
+    })),
+  });
+
+  const handleExportCSV = () => {
+    setExporting("csv");
+    try { exportToCSV(buildExportData()); } finally { setExporting(null); }
+  };
+
+  const handleExportPDF = async () => {
+    setExporting("pdf");
+    try { await exportToPDF(buildExportData()); } finally { setExporting(null); }
+  };
 
   return (
     <>
@@ -83,6 +113,24 @@ export default function GroupDetailPage() {
                     Join Group
                   </button>
                 )}
+
+                <div className="pt-2 border-t">
+                  <p className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">Export</p>
+                  <button
+                    onClick={handleExportCSV}
+                    disabled={exporting !== null}
+                    className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                  >
+                    {exporting === "csv" ? "Exporting..." : "⬇ Export CSV"}
+                  </button>
+                  <button
+                    onClick={handleExportPDF}
+                    disabled={exporting !== null}
+                    className="mt-2 w-full bg-red-600 text-white py-2.5 rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                  >
+                    {exporting === "pdf" ? "Generating..." : "📄 Export PDF"}
+                  </button>
+                </div>
               </div>
             </div>
 
