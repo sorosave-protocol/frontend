@@ -1,0 +1,48 @@
+{
+  "home": {
+    "title": "Decentralized Group Savings for Everyone",
+    "subtitle": "SoroSave brings the traditional rotating savings model (ajo, susu, chit fund) to the Stellar blockchain. Trustless, transparent, and accessible.",
+    "browse_groups": "Browse Groups",
+    "create_group": "Create a Group",
+    "how_it_works": "How It Works",
+    "why_sorosave": "Why SoroSave?",
+    "steps": {
+      "1_title": "Create a Group",
+      "1_desc": "Set contribution amount, cycle length, and max members. You become the admin.",
+      "2_title": "Members Join",
+      "2_desc": "Share the group link. Members join until the group is full or the admin starts it.",
+      "3_title": "Contribute Each Cycle",
+      "3_desc": "Every member contributes the fixed amount each round. Smart contract enforces rules.",
+      "4_title": "Receive the Pot",
+      "4_desc": "Each round, one member receives the full pot. Continues until everyone has received."
+    },
+    "features": {
+      "trustless": "Trustless",
+      "trustless_desc": "Smart contracts enforce contributions and payouts. No middleman needed.",
+      "transparent": "Transparent",
+      "transparent_desc": "All transactions are on-chain. Every member can verify the group state.",
+      "low_cost": "Low Cost",
+      "low_cost_desc": "Built on Soroban (Stellar). Transaction fees are a fraction of a cent."
+    },
+    "footer": {
+      "tagline": "Open-source decentralized group savings protocol on Soroban.",
+      "github": "GitHub",
+      "docs": "Docs",
+      "discord": "Discord"
+    }
+  },
+  "nav": {
+    "connect_wallet": "Connect Wallet",
+    "groups": "Groups",
+    "create": "Create"
+  },
+  "groups": {
+    "title": "Savings Groups",
+    "create_new": "Create New Group",
+    "no_groups": "No groups yet. Be the first to create one!",
+    "members": "members",
+    "contributions": "contributions",
+    "join": "Join",
+    "view": "View"
+  }
+}
