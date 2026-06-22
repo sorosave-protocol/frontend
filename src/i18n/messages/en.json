@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "Home",
+    "groups": "My Groups",
+    "settings": "Settings",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Welcome to SoroSave",
+    "subtitle": "Decentralized group savings on Stellar",
+    "get_started": "Get Started",
+    "join_group": "Join a Group",
+    "create_group": "Create a Group"
+  },
+  "groups": {
+    "title": "My Groups",
+    "empty": "You haven't joined any groups yet",
+    "member_count": "{count} members",
+    "contribution": "Contribution: {amount} XLM"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "success": "Success!"
+  }
+}
