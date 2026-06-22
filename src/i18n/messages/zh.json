@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "首页",
+    "groups": "我的群组",
+    "settings": "设置",
+    "language": "语言"
+  },
+  "home": {
+    "title": "欢迎使用 SoroSave",
+    "subtitle": "Stellar上的去中心化互助储蓄",
+    "get_started": "开始使用",
+    "join_group": "加入群组",
+    "create_group": "创建群组"
+  },
+  "groups": {
+    "title": "我的群组",
+    "empty": "您还没有加入任何群组",
+    "member_count": "{count} 名成员",
+    "contribution": "出资额: {amount} XLM"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "loading": "加载中...",
+    "error": "出错了",
+    "success": "成功！"
+  }
+}
