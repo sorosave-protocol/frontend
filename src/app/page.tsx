@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { Navbar } from "@/components/Navbar";
+import {Navbar} from "@/components/Navbar";
+import {getTranslations} from "next-intl/server";
 
-export default function Home() {
+export default async function Home() {
+  const t = await getTranslations("home");
   return (
     <>
       <Navbar />
@@ -11,25 +13,23 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
             <div className="max-w-3xl">
               <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-                Decentralized Group Savings for Everyone
+                {t("title")}
               </h1>
               <p className="text-xl text-primary-100 mb-8">
-                SoroSave brings the traditional rotating savings model (ajo,
-                susu, chit fund) to the Stellar blockchain. Trustless,
-                transparent, and accessible.
+                {t("subtitle")}
               </p>
               <div className="flex space-x-4">
                 <Link
                   href="/groups"
                   className="bg-white text-primary-700 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
                 >
-                  Browse Groups
+                  {t("browse_groups")}
                 </Link>
                 <Link
                   href="/groups/new"
                   className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
                 >
-                  Create a Group
+                  {t("create_group")}
                 </Link>
               </div>
             </div>
@@ -40,33 +40,29 @@ export default function Home() {
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              How It Works
+              {t("how_it_works")}
             </h2>
             <div className="grid md:grid-cols-4 gap-8">
               {[
                 {
                   step: "1",
-                  title: "Create a Group",
-                  description:
-                    "Set contribution amount, cycle length, and max members. You become the admin.",
+                  title: t("steps.1_title"),
+                  description: t("steps.1_desc"),
                 },
                 {
                   step: "2",
-                  title: "Members Join",
-                  description:
-                    "Share the group link. Members join until the group is full or the admin starts it.",
+                  title: t("steps.2_title"),
+                  description: t("steps.2_desc"),
                 },
                 {
                   step: "3",
-                  title: "Contribute Each Cycle",
-                  description:
-                    "Every member contributes the fixed amount each round. Smart contract enforces rules.",
+                  title: t("steps.3_title"),
+                  description: t("steps.3_desc"),
                 },
                 {
                   step: "4",
-                  title: "Receive the Pot",
-                  description:
-                    "Each round, one member receives the full pot. Continues until everyone has received.",
+                  title: t("steps.4_title"),
+                  description: t("steps.4_desc"),
                 },
               ].map((item) => (
                 <div key={item.step} className="text-center">
@@ -87,24 +83,21 @@ export default function Home() {
         <section className="bg-gray-100 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              Why SoroSave?
+              {t("why_sorosave")}
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  title: "Trustless",
-                  description:
-                    "Smart contracts enforce contributions and payouts. No middleman needed.",
+                  title: t("features.trustless"),
+                  description: t("features.trustless_desc"),
                 },
                 {
-                  title: "Transparent",
-                  description:
-                    "All transactions are on-chain. Every member can verify the group state.",
+                  title: t("features.transparent"),
+                  description: t("features.transparent_desc"),
                 },
                 {
-                  title: "Low Cost",
-                  description:
-                    "Built on Soroban (Stellar). Transaction fees are a fraction of a cent.",
+                  title: t("features.low_cost"),
+                  description: t("features.low_cost_desc"),
                 },
               ].map((feature) => (
                 <div
@@ -125,21 +118,19 @@ export default function Home() {
         <footer className="bg-gray-900 text-gray-400 py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-lg font-semibold text-white mb-2">SoroSave</p>
-            <p className="text-sm">
-              Open-source decentralized group savings protocol on Soroban.
-            </p>
+            <p className="text-sm">{t("footer.tagline")}</p>
             <div className="mt-4 space-x-4 text-sm">
               <a
                 href="https://github.com/big14way/sorosave"
                 className="hover:text-white"
               >
-                GitHub
+                {t("footer.github")}
               </a>
               <a href="#" className="hover:text-white">
-                Docs
+                {t("footer.docs")}
               </a>
               <a href="#" className="hover:text-white">
-                Discord
+                {t("footer.discord")}
               </a>
             </div>
           </div>
