@@ -13,7 +13,7 @@ export function ConnectWallet() {
         href="https://www.freighter.app/"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300"
+        className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
       >
         Install Freighter
       </a>
@@ -23,12 +23,12 @@ export function ConnectWallet() {
   if (isConnected && address) {
     return (
       <div className="flex items-center space-x-3">
-        <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+        <span className="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
           {shortenAddress(address)}
         </span>
         <button
           onClick={disconnect}
-          className="text-sm text-red-600 hover:text-red-800"
+          className="text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
         >
           Disconnect
         </button>
