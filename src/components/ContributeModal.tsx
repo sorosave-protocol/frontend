@@ -5,6 +5,7 @@ import { useWallet } from "@/app/providers";
 import { sorosaveClient, NETWORK_PASSPHRASE } from "@/lib/sorosave";
 import { formatAmount } from "@sorosave/sdk";
 import { signTransaction } from "@/lib/wallet";
+import { Spinner } from "@/components/Spinner";
 
 interface ContributeModalProps {
   groupId: number;
@@ -80,9 +81,16 @@ export function ContributeModal({
           <button
             onClick={handleContribute}
             disabled={loading}
-            className="flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50"
+            className="flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50 flex items-center justify-center space-x-2"
           >
-            {loading ? "Confirming..." : "Contribute"}
+            {loading ? (
+              <>
+                <Spinner size="sm" color="text-white" />
+                <span>Confirming...</span>
+              </>
+            ) : (
+              "Contribute"
+            )}
           </button>
         </div>
       </div>
