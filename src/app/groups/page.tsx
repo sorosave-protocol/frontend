@@ -2,9 +2,9 @@
 
 import { Navbar } from "@/components/Navbar";
 import { GroupCard } from "@/components/GroupCard";
+import { GroupAnalytics } from "@/components/GroupAnalytics";
 import { SavingsGroup, GroupStatus } from "@sorosave/sdk";
 
-// Placeholder data for development — will be replaced with contract queries
 const PLACEHOLDER_GROUPS: SavingsGroup[] = [
   {
     id: 1,
@@ -39,7 +39,6 @@ const PLACEHOLDER_GROUPS: SavingsGroup[] = [
 ];
 
 export default function GroupsPage() {
-  // TODO: Replace with actual contract queries
   const groups = PLACEHOLDER_GROUPS;
 
   return (
@@ -49,6 +48,9 @@ export default function GroupsPage() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Savings Groups</h1>
         </div>
+
+        {/* Analytics Dashboard injected here */}
+        {groups.length > 0 && <GroupAnalytics groups={groups} />}
 
         {groups.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
