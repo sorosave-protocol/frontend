@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "react-joyride": "^2.7.2",
     "@sorosave/sdk": "workspace:*",
     "@stellar/freighter-api": "^2.0.0",
     "next": "^14.2.0",
